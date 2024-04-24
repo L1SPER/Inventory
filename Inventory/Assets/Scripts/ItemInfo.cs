@@ -64,6 +64,16 @@ public class ItemInfo : MonoBehaviour
             canvasGameObject.SetActive(false);
         }
     }
+    public IEnumerator OpenCanvasByTime()
+    {
+        if (openCanvas)
+            yield break;
+        openCanvas = true;
+        OpenCanvas();
+        yield return new WaitForSeconds(1f);
+        openCanvas = false;
+        CloseCanvas();
+    }
     public void Interact()
     {
         Debug.Log(this.gameObject.name);

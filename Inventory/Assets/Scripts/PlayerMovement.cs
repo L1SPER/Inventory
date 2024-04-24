@@ -13,7 +13,8 @@ public class PlayerMovement : MonoBehaviour
     private float walkingSpeedMultiplier;
     [SerializeField]
     private float runningSpeedMultiplier;
-
+    [SerializeField]
+    private float crouchSpeedMultiplier;
     [SerializeField]
     private float speedMultiplier;
 
@@ -31,6 +32,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] 
     private float range;
 
+    private bool canRun;
+    
     
     // Start is called before the first frame update
     void Start()
@@ -51,7 +54,19 @@ public class PlayerMovement : MonoBehaviour
         xSpeed = Input.GetAxis("Vertical");
         zSpeed = Input.GetAxis("Horizontal");
 
-        if(Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            transform.localScale = new Vector3(1, 0.5f, 1);
+            speedMultiplier = crouchSpeedMultiplier;
+            canRun = false;
+        }
+        else if (Input.GetKeyUp(KeyCode.LeftControl))
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+            speedMultiplier = walkingSpeedMultiplier;
+            canRun = true;
+        }
+        else if(Input.GetKeyDown(KeyCode.LeftShift)&&canRun)
         {
             speedMultiplier = runningSpeedMultiplier;
         }
@@ -59,7 +74,7 @@ public class PlayerMovement : MonoBehaviour
         {
             speedMultiplier = walkingSpeedMultiplier;
         }
-
+        
         moveSpeed = face.forward * xSpeed* speedMultiplier + face.right * zSpeed* speedMultiplier;
         transform.position += moveSpeed;
     }
@@ -73,8 +88,7 @@ public class PlayerMovement : MonoBehaviour
             ItemInfo itemInfo = hit.transform.GetComponent<ItemInfo>();
             if(itemInfo != null)
             {
-                itemInfo.openCanvas = true;
-                itemInfo.OpenCanvas();
+                itemInfo.StartCoroutine("OpenCanvasByTime");
                 if(Input.GetButtonDown("Fire1"))
                 {
                     //Envantere alýncak.
