@@ -10,8 +10,12 @@ public class PlayerMovement : MonoBehaviour
     private float xSpeed;
 
     [SerializeField]
+    private float walkingSpeedMultiplier;
+    [SerializeField]
+    private float runningSpeedMultiplier;
+
+    [SerializeField]
     private float speedMultiplier;
-    private Rigidbody rb;
 
     [SerializeField]
     Transform groundCheck;
@@ -22,14 +26,16 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded;
     private Vector3 moveSpeed;
     [SerializeField] private Transform face;
-    private void Awake()
-    {
-        rb = GetComponent<Rigidbody>();
-    }
+
+    public Camera fpsCam;
+    [SerializeField] 
+    private float range;
+
+    
     // Start is called before the first frame update
     void Start()
     {
-        
+        speedMultiplier = walkingSpeedMultiplier;
     }
 
     // Update is called once per frame
@@ -37,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
     {
         GroundCheck();
         Movement();
+        Shoot();
     }
 
     private void Movement()
@@ -44,15 +51,43 @@ public class PlayerMovement : MonoBehaviour
         xSpeed = Input.GetAxis("Vertical");
         zSpeed = Input.GetAxis("Horizontal");
 
+        if(Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            speedMultiplier = runningSpeedMultiplier;
+        }
+        else if(Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            speedMultiplier = walkingSpeedMultiplier;
+        }
+
         moveSpeed = face.forward * xSpeed* speedMultiplier + face.right * zSpeed* speedMultiplier;
         transform.position += moveSpeed;
+    }
 
-        //rb.velocity= new Vector3(xSpeed* speedMultiplier*Time.deltaTime, 0f, zSpeed* speedMultiplier*Time.deltaTime);
+    private void Shoot()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
+        {
+            Debug.Log(hit.transform.name);
+            ItemInfo itemInfo = hit.transform.GetComponent<ItemInfo>();
+            if(itemInfo != null)
+            {
+                itemInfo.openCanvas = true;
+                itemInfo.OpenCanvas();
+                if(Input.GetButtonDown("Fire1"))
+                {
+                    //Envantere alýncak.
+                }
+
+            }
+        }
     }
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawSphere(groundCheck.transform.position,groundCheckRadius);
+        Gizmos.DrawRay(fpsCam.transform.position, fpsCam.transform.forward);
     }
     private bool GroundCheck()
     {

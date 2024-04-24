@@ -17,7 +17,7 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
@@ -31,11 +31,13 @@ public class CameraController : MonoBehaviour
         horizontalInput = Input.GetAxis("Mouse X")*Time.deltaTime* xRotationSpeed;
         verticalInput= Input.GetAxis("Mouse Y")*Time.deltaTime* yRotationSpeed;
 
-        playerBody.Rotate(Vector3.up * -horizontalInput);
+        playerBody.Rotate(Vector3.up * horizontalInput);
 
         verticalAngle -= verticalInput;
-        horizontalInput += horizontalInput;
+        horizontalAngle += horizontalInput;
 
-        transform.rotation=Quaternion.Euler(verticalAngle,0f, horizontalAngle);
+        verticalAngle = Mathf.Clamp(verticalAngle, -30f, 90f);
+
+        transform.rotation=Quaternion.Euler(verticalAngle, horizontalAngle, 0f);
     }
 }
