@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Amulet
   m_EditorClassIdentifier: 
   Name: 
-  Id: 0
+  id: 10
   isStackable: 0
   prefab: {fileID: -5470013036652095632, guid: d07b803c54ae9fb4ebfc1e8a13b12f4c, type: 3}
   itemType: 1
-  Description: 
+  description: 
   wearableType: 5

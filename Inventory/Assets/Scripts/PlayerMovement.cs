@@ -28,12 +28,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 moveSpeed;
     [SerializeField] private Transform face;
 
-    public Camera fpsCam;
-    [SerializeField] 
-    private float range;
-
     private bool canRun;
-    
     
     // Start is called before the first frame update
     void Start()
@@ -46,7 +41,6 @@ public class PlayerMovement : MonoBehaviour
     {
         GroundCheck();
         Movement();
-        Shoot();
     }
 
     private void Movement()
@@ -79,29 +73,10 @@ public class PlayerMovement : MonoBehaviour
         transform.position += moveSpeed;
     }
 
-    private void Shoot()
-    {
-        RaycastHit hit;
-        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
-        {
-            Debug.Log(hit.transform.name);
-            ItemInfo itemInfo = hit.transform.GetComponent<ItemInfo>();
-            if(itemInfo != null)
-            {
-                itemInfo.StartCoroutine("OpenCanvasByTime");
-                if(Input.GetButtonDown("Fire1"))
-                {
-                    //Envantere alýncak.
-                }
-
-            }
-        }
-    }
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawSphere(groundCheck.transform.position,groundCheckRadius);
-        Gizmos.DrawRay(fpsCam.transform.position, fpsCam.transform.forward);
     }
     private bool GroundCheck()
     {

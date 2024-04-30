@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    public ItemObject itemobject;
+    public ItemObject itemObject;
+    public int id;
     public int amount;
-    public int ID;
+    private void Awake()
+    {
+        this.id = itemObject.id;
+    }
 }

@@ -13,13 +13,13 @@ public enum ItemType
 public class ItemObject : ScriptableObject
 {
     public string Name;
-    public int Id;
+    public int id;
     public bool isStackable;
     public Sprite prefab;
     [SerializeField]
     protected ItemType itemType;
     [TextArea(15, 20)]
-    public string Description;
+    public string description;
 }
 
 

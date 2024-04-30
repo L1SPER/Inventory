@@ -376,7 +376,10 @@
 "Assets/ScriptableObjects/WearableItems/Shoe.cs"
 "Assets/ScriptableObjects/WearableItems/Trousers.cs"
 "Assets/Scripts/CameraController.cs"
+"Assets/Scripts/DisplayInventory.cs"
+"Assets/Scripts/InventoryObject.cs"
 "Assets/Scripts/ItemInfo.cs"
+"Assets/Scripts/PlayerInteraction.cs"
 "Assets/Scripts/PlayerMovement.cs"
 -langversion:9.0
 
