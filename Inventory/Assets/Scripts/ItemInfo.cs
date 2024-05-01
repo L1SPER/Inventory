@@ -42,8 +42,8 @@ public class ItemInfo : MonoBehaviour
         textGameObject.GetComponent<TextMeshProUGUI>().alignment = TextAlignmentOptions.Center;
         textGameObject.GetComponent<RectTransform>().rotation = Quaternion.Euler(0, 0, 0);
         textGameObject.transform.SetParent(canvasGameObject.transform);
-        textGameObject.GetComponent<TextMeshProUGUI>().text = this.gameObject.name;
-        //textGameObject.GetComponent<TextMeshProUGUI>().text = GetComponent<Item>().itemobject.;
+       // textGameObject.GetComponent<TextMeshProUGUI>().text = this.gameObject.name;
+        textGameObject.GetComponent<TextMeshProUGUI>().text = GetComponent<Item>().itemObject.name;
         canvasGameObject.SetActive(false);
 
         //this.name = GetComponent<Item>().name;

@@ -1149,7 +1149,7 @@ MonoBehaviour:
   yStartPos: 42
   xSpaceBetweenItem: 20
   ySpaceBetweenItem: 15
-  numberOfColumn: 3
+  numberOfColumn: 5
   numberOfRow: 5
   itemSlot: {fileID: 1677860061}
 --- !u!1 &1570551465

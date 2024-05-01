@@ -15,6 +15,7 @@ public class ItemObject : ScriptableObject
     public string Name;
     public int id;
     public bool isStackable;
+    public int slotAmountMax;
     public Sprite prefab;
     [SerializeField]
     protected ItemType itemType;
