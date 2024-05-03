@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Shoe
   m_EditorClassIdentifier: 
   Name: 
-  id: 0
+  id: 10
   isStackable: 0
-  slotAmountMax: 0
-  prefab: {fileID: 6471586766639389086, guid: d07b803c54ae9fb4ebfc1e8a13b12f4c, type: 3}
+  slotAmountMax: 1
+  uiDisplay: {fileID: 6471586766639389086, guid: d07b803c54ae9fb4ebfc1e8a13b12f4c, type: 3}
   itemType: 1
   description: 
   wearableType: 4

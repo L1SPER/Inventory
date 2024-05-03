@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Ring
   m_EditorClassIdentifier: 
   Name: 
-  id: 10
+  id: 9
   isStackable: 0
-  slotAmountMax: 0
-  prefab: {fileID: -5893210615866333270, guid: d07b803c54ae9fb4ebfc1e8a13b12f4c, type: 3}
+  slotAmountMax: 1
+  uiDisplay: {fileID: -5893210615866333270, guid: d07b803c54ae9fb4ebfc1e8a13b12f4c, type: 3}
   itemType: 1
   description: 
   wearableType: 6

@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Trousers
   m_EditorClassIdentifier: 
   Name: 
-  id: 0
+  id: 11
   isStackable: 0
-  slotAmountMax: 0
-  prefab: {fileID: 7594132129598752404, guid: d07b803c54ae9fb4ebfc1e8a13b12f4c, type: 3}
+  slotAmountMax: 1
+  uiDisplay: {fileID: 7594132129598752404, guid: d07b803c54ae9fb4ebfc1e8a13b12f4c, type: 3}
   itemType: 1
   description: 
   wearableType: 3

@@ -14,17 +14,17 @@ public class InventoryObject : ScriptableObject
         {
             if (!item.itemObject.isStackable)
             {
-                inventory.Items[GetLastEmptySlot()].item = item;
-                inventory.Items[GetLastEmptySlot()].id = item.id;
-                inventory.Items[GetLastEmptySlot()].amount = item.amount;
+                inventory.Items[GetLastEmptySlot()].UpdateSlot(item, item.id, item.amount);
+                Destroy(item.gameObject);
             }
             else if (item.itemObject.isStackable)
             {
                 for (int i = 0; i < inventory.Items.Length; i++)
                 {
+                    //Envanterde item zaten var mý diye itemi arýyorum
                     if (inventory.Items[i].id==item.id)
                     {
-                        //Envanterde olan itemi ekledim.
+                        //Envanterde olan iteme ekledim.
                         if(item.itemObject.slotAmountMax >= item.amount + inventory.Items[i].amount)
                         {
                             inventory.Items[i].amount+= item.amount;
@@ -40,21 +40,47 @@ public class InventoryObject : ScriptableObject
                             if(!IsInventoryFull())
                             {
                                 //Arada bir yerde eðer boþ slot varsa diye son boþ slota koyuyorum
-                                inventory.Items[GetLastEmptySlot()].item = item;
-                                inventory.Items[GetLastEmptySlot()].id = item.id;
-                                inventory.Items[GetLastEmptySlot()].amount = remain;
+                                inventory.Items[GetLastEmptySlot()].UpdateSlot(item, item.id, remain);
                                 Destroy(item.gameObject);
                             }
                             else
                             {
                                 item.amount = remain;
-                                Debug.Log("Envanter dolu");
                             }
                         }
+                    }
+                    //Envanterde yoksa itemi ekliyorum.
+                    else
+                    {
+                        inventory.Items[GetLastEmptySlot()].UpdateSlot(item, item.id, item.amount);
+                        Destroy(item.gameObject);
+                        break;
                     }
                 }
             }
         }
+    }
+    public InventorySlot FindItemInSlots(Item _item)
+    {
+        for (int i = 0; i < inventory.Items.Length; i++)
+        {
+            if (inventory.Items[i].id == _item.id)
+            {
+                return inventory.Items[i];
+            }
+        }
+        return null;
+    }
+    public bool IsExistSameItemInSlots(Item _item)
+    {
+        for (int i = 0; i < inventory.Items.Length; i++)
+        {
+            if (inventory.Items[i].id == _item.id)
+            {
+                return true;
+            }
+        }
+        return false;
     }
     public bool IsInventoryFull()
     {
@@ -80,7 +106,7 @@ public class InventoryObject : ScriptableObject
 [System.Serializable]
 public class Inventory
 {
-    public InventorySlot[] Items = new InventorySlot[25];
+    public InventorySlot[] Items = new InventorySlot[30];
 }
 [System.Serializable]
 public class InventorySlot
@@ -100,7 +126,7 @@ public class InventorySlot
         this.amount = _amount;
         this.id = _id;
     }
-    public void UpdateSlot(Item _item,int _amount,int _id)
+    public void UpdateSlot(Item _item,int _id, int _amount)
     {
         this.item = _item;
         this.amount = _amount;

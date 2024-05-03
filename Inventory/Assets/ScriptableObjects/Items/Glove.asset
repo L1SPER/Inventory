@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Glove
   m_EditorClassIdentifier: 
   Name: 
-  id: 0
+  id: 4
   isStackable: 0
-  slotAmountMax: 0
-  prefab: {fileID: 2568506949165742456, guid: d07b803c54ae9fb4ebfc1e8a13b12f4c, type: 3}
+  slotAmountMax: 1
+  uiDisplay: {fileID: 2568506949165742456, guid: d07b803c54ae9fb4ebfc1e8a13b12f4c, type: 3}
   itemType: 1
   description: 
   wearableType: 2

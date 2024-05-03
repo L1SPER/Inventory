@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-[System.Serializable]
 public class Item : MonoBehaviour,IInteractable
 {
     public ItemObject itemObject;
@@ -17,6 +16,7 @@ public class Item : MonoBehaviour,IInteractable
 
     public void InteractWithPressingButton()
     {
+        
     }
 
     private void Awake()

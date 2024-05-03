@@ -12,7 +12,8 @@ public class WeaponItems : ItemObject
 public enum WeaponType
 {
     MeleeWeapon,
-    RangedWeapon
+    RangedWeapon,
+    None
 }
 public enum Weapon
 {

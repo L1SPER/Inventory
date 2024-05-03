@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b22368d9b6579248a240d488ecfcba3, type: 3}
   m_Name: Amulet
   m_EditorClassIdentifier: 
-  Name: 
+  Name: Silver Amulet
   id: 0
   isStackable: 0
   slotAmountMax: 1
-  prefab: {fileID: -5470013036652095632, guid: d07b803c54ae9fb4ebfc1e8a13b12f4c, type: 3}
+  uiDisplay: {fileID: -5470013036652095632, guid: d07b803c54ae9fb4ebfc1e8a13b12f4c, type: 3}
   itemType: 1
   description: 
   wearableType: 5
