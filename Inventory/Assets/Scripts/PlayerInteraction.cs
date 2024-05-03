@@ -18,16 +18,19 @@ public class PlayerInteraction : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
         {
-            Debug.Log(hit.transform.name);
-            ItemInfo itemInfo = hit.transform.GetComponent<ItemInfo>();
-            if (itemInfo != null)
+            Item item=hit.transform.GetComponent<Item>();
+            IInteractable InteractableObj = hit.transform.GetComponent<IInteractable>();
+            if (InteractableObj != null)
             {
-                itemInfo.StartCoroutine("OpenCanvasByTime");
-                if (Input.GetButtonDown("Fire1"))
+                InteractableObj.InteractWithoutPressingButton();
+                if (Input.GetButtonDown("Fire1")&&item)
                 {
-                    //Envantere alýncak.
+                    slot.AddItem(item);
                 }
-
+                else if(Input.GetButtonDown("Fire1"))
+                {
+                    InteractableObj.InteractWithPressingButton();
+                }
             }
         }
     }

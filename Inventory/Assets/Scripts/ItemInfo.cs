@@ -46,7 +46,7 @@ public class ItemInfo : MonoBehaviour
         textGameObject.GetComponent<TextMeshProUGUI>().text = GetComponent<Item>().itemObject.name;
         canvasGameObject.SetActive(false);
 
-        //this.name = GetComponent<Item>().name;
+        this.name = GetComponent<Item>().itemObject.name;
     }
 
     public void OpenCanvas()
@@ -74,9 +74,5 @@ public class ItemInfo : MonoBehaviour
         yield return new WaitForSeconds(1f);
         openCanvas = false;
         CloseCanvas();
-    }
-    public void Interact()
-    {
-        Debug.Log(this.gameObject.name);
     }
 }
