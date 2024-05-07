@@ -8,7 +8,7 @@ public class PlayerInteraction : MonoBehaviour
     public Camera fpsCam;
     [SerializeField]
     private float range;
-    public InventoryObject slot;
+    public InventoryObject inventory;
     public readonly KeyCode inventoryKey = KeyCode.Tab;
     [SerializeField] private GameObject canvas;
     private bool isInventoryOpen;
@@ -22,6 +22,18 @@ public class PlayerInteraction : MonoBehaviour
     {
         OpenInventory();
         Shoot();
+        SaveLoadFunctions();
+    }
+    private void SaveLoadFunctions()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            inventory.Save();
+        }
+        if (Input.GetKeyDown(KeyCode.KeypadEnter))
+        {
+            inventory.Load();
+        }
     }
 
     private void OpenInventory()
@@ -44,14 +56,13 @@ public class PlayerInteraction : MonoBehaviour
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
         {
             Item item=hit.transform.GetComponent<Item>();
-            Debug.Log(hit.transform.name);
             IInteractable InteractableObj = hit.transform.GetComponent<IInteractable>();
             if (InteractableObj != null)
             {
                 InteractableObj.InteractWithoutPressingButton();
                 if (Input.GetButtonDown("Fire1")&&item)
                 {
-                    slot.AddItem(item);
+                    inventory.AddItem(item);
                 }
                 else if(Input.GetButtonDown("Fire1"))
                 {
@@ -59,5 +70,9 @@ public class PlayerInteraction : MonoBehaviour
                 }
             }
         }
+    }
+    private void OnApplicationQuit()
+    {
+        inventory.Container.Items = new InventorySlot[30];
     }
 }

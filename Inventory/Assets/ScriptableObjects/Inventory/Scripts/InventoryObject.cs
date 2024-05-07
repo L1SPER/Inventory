@@ -1,46 +1,52 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Cryptography;
+using System.Xml.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "InventoryObject", menuName = "ItemObject/InventoryObject")]
 public class InventoryObject : ScriptableObject
 {
-    public Inventory inventory;
+    public string savePath;
+    public Inventory Container;
     public void AddItem(Item item)
     {
         if(!IsInventoryFull())
         {
             if (!item.itemObject.isStackable)
             {
-                inventory.Items[GetLastEmptySlot()].UpdateSlot(item, item.id, item.amount);
+                Container.Items[GetLastEmptySlot()].UpdateSlot(item, item.id, item.amount);
                 Destroy(item.gameObject);
             }
             else if (item.itemObject.isStackable)
             {
-                for (int i = 0; i < inventory.Items.Length; i++)
+                for (int i = 0; i < Container.Items.Length; i++)
                 {
                     //Envanterde item zaten var mý diye itemi arýyorum
-                    if (inventory.Items[i].id==item.id)
+                    if (Container.Items[i].id==item.id)
                     {
                         //Envanterde olan iteme ekledim.
-                        if(item.itemObject.slotAmountMax >= item.amount + inventory.Items[i].amount)
+                        if(item.itemObject.slotAmountMax >= item.amount + Container.Items[i].amount)
                         {
-                            inventory.Items[i].amount+= item.amount;
+                            Container.Items[i].amount+= item.amount;
                             Destroy(item.gameObject);
                         }
                         //Envanterde olmayan itemi ekledim.
                         else
                         {
-                            int remain = item.amount + inventory.Items[i].amount - item.itemObject.slotAmountMax;
-                            inventory.Items[i].amount = item.itemObject.slotAmountMax;
+                            int remain = item.amount + Container.Items[i].amount - item.itemObject.slotAmountMax;
+                            Container.Items[i].amount = item.itemObject.slotAmountMax;
 
                             //Fazlasýný envanterde yer varsa slot oluþturdum yoksa itemin miktarýný azalttým
                             if(!IsInventoryFull())
                             {
                                 //Arada bir yerde eðer boþ slot varsa diye son boþ slota koyuyorum
-                                inventory.Items[GetLastEmptySlot()].UpdateSlot(item, item.id, remain);
+                                Container.Items[GetLastEmptySlot()].UpdateSlot(item, item.id, remain);
                                 Destroy(item.gameObject);
                             }
                             else
@@ -52,7 +58,7 @@ public class InventoryObject : ScriptableObject
                     //Envanterde yoksa itemi ekliyorum.
                     else
                     {
-                        inventory.Items[GetLastEmptySlot()].UpdateSlot(item, item.id, item.amount);
+                        Container.Items[GetLastEmptySlot()].UpdateSlot(item, item.id, item.amount);
                         Destroy(item.gameObject);
                         break;
                     }
@@ -60,22 +66,48 @@ public class InventoryObject : ScriptableObject
             }
         }
     }
+    [ContextMenu("Save")]
+    public void Save()
+    {
+        string jsonString = JsonUtility.ToJson(Container);
+        File.WriteAllText(string.Concat(Application.persistentDataPath, savePath), jsonString);
+    }
+    [ContextMenu("Load")]
+    public void Load()
+    {
+        if (File.Exists(string.Concat(Application.persistentDataPath, savePath)))
+        {
+            string readJson = File.ReadAllText(string.Concat(Application.persistentDataPath, savePath));
+            Inventory newContainer = JsonUtility.FromJson<Inventory>(readJson);
+            for (int i = 0; i < Container.Items.Length; i++)
+            {
+                Container.Items[i].UpdateSlot(newContainer.Items[i].item,
+                                                newContainer.Items[i].item.id,
+                                                newContainer.Items[i].item.amount);
+            }
+        }
+    }
+    [ContextMenu("Clear")]
+    public void Clear()
+    {
+        Container=new Inventory();
+    }
     public InventorySlot FindItemInSlots(Item _item)
     {
-        for (int i = 0; i < inventory.Items.Length; i++)
+        for (int i = 0; i < Container.Items.Length; i++)
         {
-            if (inventory.Items[i].id == _item.id)
+            if (Container.Items[i].id == _item.id)
             {
-                return inventory.Items[i];
+                return Container.Items[i];
             }
         }
         return null;
     }
     public bool IsExistSameItemInSlots(Item _item)
     {
-        for (int i = 0; i < inventory.Items.Length; i++)
+        for (int i = 0; i < Container.Items.Length; i++)
         {
-            if (inventory.Items[i].id == _item.id)
+            if (Container.Items[i].id == _item.id)
             {
                 return true;
             }
@@ -84,9 +116,9 @@ public class InventoryObject : ScriptableObject
     }
     public bool IsInventoryFull()
     {
-        for (int i = 0; i < inventory.Items.Length; i++)
+        for (int i = 0; i < Container.Items.Length; i++)
         {
-            if (inventory.Items[i].id == -1)
+            if (Container.Items[i].id == -1)
             {
                 return false;
             }
@@ -95,9 +127,9 @@ public class InventoryObject : ScriptableObject
     }
     public int GetLastEmptySlot()
     {
-        for (int i = 0; i < inventory.Items.Length; i++)
+        for (int i = 0; i < Container.Items.Length; i++)
         {
-            if (inventory.Items[i].id == -1)
+            if (Container.Items[i].id == -1)
                 return i;
         }
         return -1;

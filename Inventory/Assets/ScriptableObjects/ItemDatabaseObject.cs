@@ -21,7 +21,6 @@ public class ItemDatabaseObject : ScriptableObject,ISerializationCallbackReceive
             GetItem.Add(items[i], i);
         }
     }
-
     public void OnBeforeSerialize()
     {
         GetItem=new Dictionary<ItemObject, int>();

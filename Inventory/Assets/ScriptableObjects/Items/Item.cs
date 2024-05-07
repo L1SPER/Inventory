@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -8,7 +9,7 @@ public class Item : MonoBehaviour,IInteractable
     public ItemObject itemObject;
     public int id;
     public int amount;
-
+    
     public void InteractWithoutPressingButton()
     {
         GetComponent<ItemInfo>().StartCoroutine("OpenCanvasByTime");

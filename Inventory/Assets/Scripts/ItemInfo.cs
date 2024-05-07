@@ -1,9 +1,7 @@
 
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using static UnityEditor.Progress;
 using UnityEngine.UI;
 
 public class ItemInfo : MonoBehaviour
@@ -17,18 +15,12 @@ public class ItemInfo : MonoBehaviour
 
     private void CreateCanvas()
     {
-        canvasGameObject = new GameObject();
-        canvasGameObject.AddComponent<RectTransform>();
-        canvasGameObject.AddComponent<Canvas>();
-        canvasGameObject.AddComponent<CanvasScaler>();
-        canvasGameObject.AddComponent<GraphicRaycaster>();
-        canvasGameObject.GetComponent<RectTransform>().position = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
-        canvasGameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(800, 450);
-        canvasGameObject.GetComponent<RectTransform>().localScale = new Vector3(0.006318337f, 0.006318337f, 0.006318337f);
-        canvasGameObject.GetComponent<RectTransform>().rotation = Quaternion.Euler(0, 0, 0);
-        canvasGameObject.name = "ItemInfoCanvas";
-        canvasGameObject.transform.SetParent(this.transform);
+        CreateItemInfoCanvas();
+        CreateGameObject();
+    }
 
+    private void CreateGameObject()
+    {
         GameObject textGameObject = new GameObject();
         textGameObject.name = "ItemName";
         textGameObject.AddComponent<TextMeshProUGUI>();
@@ -44,8 +36,22 @@ public class ItemInfo : MonoBehaviour
         textGameObject.transform.SetParent(canvasGameObject.transform);
         textGameObject.GetComponent<TextMeshProUGUI>().text = GetComponent<Item>().itemObject.name;
         canvasGameObject.SetActive(false);
-
         this.name = GetComponent<Item>().itemObject.name;
+    }
+
+    private void CreateItemInfoCanvas()
+    {
+        canvasGameObject = new GameObject();
+        canvasGameObject.AddComponent<RectTransform>();
+        canvasGameObject.AddComponent<Canvas>();
+        canvasGameObject.AddComponent<CanvasScaler>();
+        canvasGameObject.AddComponent<GraphicRaycaster>();
+        canvasGameObject.GetComponent<RectTransform>().position = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
+        canvasGameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(800, 450);
+        canvasGameObject.GetComponent<RectTransform>().localScale = new Vector3(0.006318337f, 0.006318337f, 0.006318337f);
+        canvasGameObject.GetComponent<RectTransform>().rotation = Quaternion.Euler(0, 0, 0);
+        canvasGameObject.name = "ItemInfoCanvas";
+        canvasGameObject.transform.SetParent(this.transform);
     }
 
     public void OpenCanvas()

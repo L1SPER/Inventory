@@ -24,7 +24,7 @@ public class DisplayInventory : MonoBehaviour
     private GameObject itemSlotPrefab;
 
     public InventoryObject inventory;
-    Dictionary<GameObject,InventorySlot> slotsOnInterface= new Dictionary<GameObject,InventorySlot>();
+    Dictionary<GameObject,InventorySlot> slotsOnInterface=new Dictionary<GameObject,InventorySlot>();
 
     private void Start()
     {
@@ -38,18 +38,16 @@ public class DisplayInventory : MonoBehaviour
 
     private void UpdateDisplay()
     {
-        foreach (KeyValuePair<GameObject,InventorySlot> slot in slotsOnInterface)
+        foreach (KeyValuePair<GameObject, InventorySlot> slot in slotsOnInterface)
         {
             if(slot.Value.id>=0)
             {
-                //slot.Key.transform.GetChild(0).GetComponent<Image>().color = new Color(212, 217, 162, 255);
                 slot.Key.transform.GetChild(1).GetComponent<Image>().color = new Color(255, 255, 255, 255);
                 slot.Key.transform.GetChild(1).GetComponent<Image>().sprite = slot.Value.item.itemObject.uiDisplay;
                 slot.Key.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = slot.Value.amount.ToString();
             }
             else
             {
-                //slot.Key.transform.GetChild(0).GetComponent<Image>().color = new Color(212, 217, 162, 255);
                 slot.Key.transform.GetChild(1).GetComponent<Image>().color = new Color(255, 255, 255, 0);
                 slot.Key.transform.GetChild(1).GetComponent<Image>().sprite = null;
                 slot.Key.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "";
@@ -59,16 +57,16 @@ public class DisplayInventory : MonoBehaviour
 
     private void CreateDisplay()
     {
-        for (int i = 0; i < inventory.inventory.Items.Length; i++)
+        for (int i = 0; i < inventory.Container.Items.Length; i++)
         {
+            InventorySlot slot= inventory.Container.Items[i];
+
             var obj = Instantiate(itemSlotPrefab, Vector3.zero, Quaternion.identity, transform);
             obj.GetComponent<RectTransform>().localPosition = GetPosition(i);
-
-            //obj.transform.GetChild(0).GetComponent<Image>().color = new Color(212, 217, 162, 255);
             obj.transform.GetChild(1).GetComponent<Image>().color = new Color(255, 255, 255, 0);
             obj.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "";
 
-            slotsOnInterface.Add(obj, inventory.inventory.Items[i]);
+            slotsOnInterface.Add(obj,slot);
         }
     }
     private Vector3 GetPosition(int index)
