@@ -81,6 +81,8 @@ public class InventoryObject : ScriptableObject
             Inventory newContainer = JsonUtility.FromJson<Inventory>(readJson);
             for (int i = 0; i < Container.Items.Length; i++)
             {
+                if(newContainer.Items[i].item == null)
+                    break;
                 Container.Items[i].UpdateSlot(newContainer.Items[i].item,
                                                 newContainer.Items[i].item.id,
                                                 newContainer.Items[i].item.amount);
