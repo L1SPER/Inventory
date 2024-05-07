@@ -363,6 +363,7 @@
 "Assets/ScriptableObjects/Items/ConsumableItem/Scripts/Potion.cs"
 "Assets/ScriptableObjects/Items/ConsumableItems.cs"
 "Assets/ScriptableObjects/Items/Item.cs"
+"Assets/ScriptableObjects/Items/ItemBuff.cs"
 "Assets/ScriptableObjects/Items/ItemObject.cs"
 "Assets/ScriptableObjects/Items/WeaponItems.cs"
 "Assets/ScriptableObjects/Items/Weapons/Scripts/Glock.cs"

@@ -105,3 +105,4 @@ MonoBehaviour:
     - item: {fileID: 0}
       id: -1
       amount: 0
+  database: {fileID: 0}

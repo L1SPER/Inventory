@@ -256,6 +256,7 @@ MonoBehaviour:
   itemObject: {fileID: 11400000, guid: 7bd0b84abbedaf843b7f5c9d8415bd64, type: 2}
   id: 0
   amount: 5
+  buffs: []
 --- !u!114 &159400831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -551,6 +552,7 @@ MonoBehaviour:
   itemObject: {fileID: 11400000, guid: d8c637c16ae72dd4ab509a11a99475b8, type: 2}
   id: 0
   amount: 1
+  buffs: []
 --- !u!114 &376258016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -709,6 +711,7 @@ MonoBehaviour:
   itemObject: {fileID: 11400000, guid: 2ff3c91b4b5688b41936ca3aef9c537c, type: 2}
   id: 0
   amount: 1
+  buffs: []
 --- !u!114 &662863767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -930,6 +933,7 @@ MonoBehaviour:
   itemObject: {fileID: 11400000, guid: 8d0526ba843ed4848ba29fc0dafe0265, type: 2}
   id: 0
   amount: 1
+  buffs: []
 --- !u!114 &754692776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1324,6 +1328,7 @@ MonoBehaviour:
   itemObject: {fileID: 11400000, guid: 1f39a9c5091b3244ba7d477770cb3790, type: 2}
   id: 0
   amount: 1
+  buffs: []
 --- !u!114 &1358480338
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1583,6 +1588,7 @@ MonoBehaviour:
   itemObject: {fileID: 11400000, guid: 8a4ff5cc3ced49f46a0e289fadd484d2, type: 2}
   id: 0
   amount: 1
+  buffs: []
 --- !u!114 &1477952416
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1801,6 +1807,7 @@ MonoBehaviour:
   itemObject: {fileID: 11400000, guid: 645ebb9572a23774bbf8c8fc5a3317c8, type: 2}
   id: 0
   amount: 1
+  buffs: []
 --- !u!1 &1528326446
 GameObject:
   m_ObjectHideFlags: 0
@@ -1934,6 +1941,7 @@ MonoBehaviour:
   itemObject: {fileID: 11400000, guid: b7056924821b9ff428dd0a55959946d0, type: 2}
   id: 0
   amount: 5
+  buffs: []
 --- !u!114 &1558629820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2290,6 +2298,7 @@ MonoBehaviour:
   itemObject: {fileID: 11400000, guid: 04430377adce6f94b8fc525ce00cbcda, type: 2}
   id: 0
   amount: 1
+  buffs: []
 --- !u!114 &2019834022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2514,6 +2523,7 @@ MonoBehaviour:
   itemObject: {fileID: 11400000, guid: 5275efa430e12a049b0329074cdb4034, type: 2}
   id: 0
   amount: 1
+  buffs: []
 --- !u!114 &2140077363
 MonoBehaviour:
   m_ObjectHideFlags: 0

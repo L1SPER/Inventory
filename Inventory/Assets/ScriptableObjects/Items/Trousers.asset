@@ -19,4 +19,17 @@ MonoBehaviour:
   uiDisplay: {fileID: 7594132129598752404, guid: d07b803c54ae9fb4ebfc1e8a13b12f4c, type: 3}
   itemType: 1
   description: 
+  itemBuffs:
+  - attributes: 1
+    value: 0
+    minValue: 1
+    maxValue: 10
+  - attributes: 2
+    value: 0
+    minValue: 1
+    maxValue: 100
+  - attributes: 0
+    value: 0
+    minValue: 1
+    maxValue: 10
   wearableType: 3

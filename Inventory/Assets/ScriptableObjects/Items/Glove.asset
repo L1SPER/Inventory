@@ -19,4 +19,5 @@ MonoBehaviour:
   uiDisplay: {fileID: 2568506949165742456, guid: d07b803c54ae9fb4ebfc1e8a13b12f4c, type: 3}
   itemType: 1
   description: 
+  itemBuffs: []
   wearableType: 2

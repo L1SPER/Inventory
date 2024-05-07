@@ -7,7 +7,7 @@ using UnityEngine;
 public class ItemDatabaseObject : ScriptableObject,ISerializationCallbackReceiver
 {
     public ItemObject [] items;
-    Dictionary<ItemObject, int> GetItem=new Dictionary<ItemObject, int>();
+    public Dictionary<ItemObject, int> GetItem=new Dictionary<ItemObject, int>();
 
     public void OnAfterDeserialize()
     {

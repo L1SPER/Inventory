@@ -16,9 +16,10 @@ MonoBehaviour:
   id: 0
   isStackable: 0
   slotAmountMax: 0
-  prefab: {fileID: 0}
+  uiDisplay: {fileID: 0}
   itemType: 2
   description: 
+  itemBuffs: []
   weaponType: 1
   weapon: 6
   AmmoClipSize: 0

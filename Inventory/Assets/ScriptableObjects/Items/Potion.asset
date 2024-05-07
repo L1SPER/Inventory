@@ -19,4 +19,9 @@ MonoBehaviour:
   uiDisplay: {fileID: -3237844493445452581, guid: d07b803c54ae9fb4ebfc1e8a13b12f4c, type: 3}
   itemType: 3
   description: 
+  itemBuffs:
+  - attributes: 5
+    value: 0
+    minValue: 1
+    maxValue: 10
   consumeType: 0

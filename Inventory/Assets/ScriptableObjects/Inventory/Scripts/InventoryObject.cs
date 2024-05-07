@@ -14,13 +14,15 @@ public class InventoryObject : ScriptableObject
 {
     public string savePath;
     public Inventory Container;
+    public ItemDatabaseObject database;
     public void AddItem(Item item)
     {
         if(!IsInventoryFull())
         {
+            //ItemObject itemObject = database.GetItem[].
             if (!item.itemObject.isStackable)
             {
-                Container.Items[GetLastEmptySlot()].UpdateSlot(item, item.id, item.amount);
+                Container.Items[FindLastEmptySlot()].UpdateSlot(item, item.id, item.amount);
                 Destroy(item.gameObject);
             }
             else if (item.itemObject.isStackable)
@@ -46,7 +48,7 @@ public class InventoryObject : ScriptableObject
                             if(!IsInventoryFull())
                             {
                                 //Arada bir yerde eðer boþ slot varsa diye son boþ slota koyuyorum
-                                Container.Items[GetLastEmptySlot()].UpdateSlot(item, item.id, remain);
+                                Container.Items[FindLastEmptySlot() ].UpdateSlot(item, item.id, remain);
                                 Destroy(item.gameObject);
                             }
                             else
@@ -58,12 +60,16 @@ public class InventoryObject : ScriptableObject
                     //Envanterde yoksa itemi ekliyorum.
                     else
                     {
-                        Container.Items[GetLastEmptySlot()].UpdateSlot(item, item.id, item.amount);
+                        Container.Items[FindLastEmptySlot()].UpdateSlot(item, item.id, item.amount);
                         Destroy(item.gameObject);
                         break;
                     }
                 }
             }
+        }
+        else
+        {
+            Debug.LogWarning("You cant add more items !!!");
         }
     }
     [ContextMenu("Save")]
@@ -92,9 +98,9 @@ public class InventoryObject : ScriptableObject
     [ContextMenu("Clear")]
     public void Clear()
     {
-        Container=new Inventory();
+        Container.Clear();
     }
-    public InventorySlot FindItemInSlots(Item _item)
+    public InventorySlot FindItemOnInventory(Item _item)
     {
         for (int i = 0; i < Container.Items.Length; i++)
         {
@@ -105,7 +111,7 @@ public class InventoryObject : ScriptableObject
         }
         return null;
     }
-    public bool IsExistSameItemInSlots(Item _item)
+    public bool IsExistSameItemOnInventory(Item _item)
     {
         for (int i = 0; i < Container.Items.Length; i++)
         {
@@ -127,9 +133,23 @@ public class InventoryObject : ScriptableObject
         }
         return true;
     }
-    public int GetLastEmptySlot()
+    public int EmptySlotCount
     {
-        for (int i = 0; i < Container.Items.Length; i++)
+        get
+        {
+            int counter = 0;
+            for (int i = 0; i < Container.Items.Length; i++)
+            {
+                if (Container.Items[i].id == -1)
+                    counter++;
+            }
+            return counter;
+        }
+        
+    }
+    public int FindLastEmptySlot()
+    {
+        for (int i = 0; i<Container.Items.Length; i++)
         {
             if (Container.Items[i].id == -1)
                 return i;
@@ -141,18 +161,25 @@ public class InventoryObject : ScriptableObject
 public class Inventory
 {
     public InventorySlot[] Items = new InventorySlot[30];
-}
+    public void Clear()
+    {
+        for (int i = 0; i < Items.Length; i++)
+        {
+            Items[i].RemoveItem();
+        }
+    }
+} 
 [System.Serializable]
 public class InventorySlot
 {
-    public Item item;
+    public Item item=new Item();
     public int id;
     public int amount;
     public InventorySlot()
     {
-        this.item = null;
+        this.item=new Item();
         this.id = -1;
-        this.amount = 0;
+        this.amount=0;
     }
     public InventorySlot(Item _item,int _amount, int _id)
     {
@@ -169,5 +196,11 @@ public class InventorySlot
     public void AddAmount(int amount)
     {
         this.amount += amount;
+    }
+    public void RemoveItem()
+    {
+        this.item = new Item();
+        this.id = -1;
+        this.amount= 0;
     }
 }
