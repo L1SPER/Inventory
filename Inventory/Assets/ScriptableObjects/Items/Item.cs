@@ -10,7 +10,7 @@ public class Item : MonoBehaviour,IInteractable
     public ItemObject itemObject;
     public int id;
     public int amount;
-    //public string Name;
+    public string Name;
     public ItemBuff[] buffs;
 
     public Item()
