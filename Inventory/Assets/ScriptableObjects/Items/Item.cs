@@ -5,26 +5,34 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 [System.Serializable]
-public class Item : MonoBehaviour,IInteractable
+public class Item 
 {
-    public ItemObject itemObject;
     public int id;
     public int amount;
     public string Name;
+    public ItemObject itemObject;
     public ItemBuff[] buffs;
 
     public Item()
     {
-        //this.itemObject= null;
-        this.id= -1;
+        this.id = -1;
         this.amount=0;
-        //Name=string.Empty;
+        this.Name=string.Empty;
+        this.itemObject= null;
+    }
+    public Item(int _id,int _amount,string _name,ItemObject _itemObject)
+    {
+        this.id = _id;
+        this.amount=_amount;
+        this.Name = _name;
+        this.itemObject= _itemObject;
     }
     public Item(ItemObject itemObject)
     {
+        this.itemObject= itemObject;
         this.id= itemObject.id;
-        //Name= itemObject.name;  
-        buffs=new ItemBuff[itemObject.itemBuffs.Length];
+        this.Name= itemObject.Name;  
+        this.buffs=new ItemBuff[itemObject.itemBuffs.Length];
         for (int i = 0; i < buffs.Length; i++)
         {
             buffs[i] = new ItemBuff(itemObject.itemBuffs[i].minValue, itemObject.itemBuffs[i].maxValue)
@@ -32,20 +40,5 @@ public class Item : MonoBehaviour,IInteractable
                 attributes = itemObject.itemBuffs[i].attributes
             };
         }
-    }
-
-    public void InteractWithoutPressingButton()
-    {
-        GetComponent<ItemInfo>().StartCoroutine("OpenCanvasByTime");
-    }
-
-    public void InteractWithPressingButton()
-    {
-        
-    }
-
-    private void Awake()
-    {
-        this.id = itemObject.id;
     }
 }

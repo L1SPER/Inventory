@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b22368d9b6579248a240d488ecfcba3, type: 3}
   m_Name: Amulet
   m_EditorClassIdentifier: 
-  Name: Silver Amulet
+  Name: Amulet
   id: 0
   isStackable: 0
   slotAmountMax: 1

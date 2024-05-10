@@ -12,13 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d118ed3605aa8964daacd0325221dbb1, type: 3}
   m_Name: Hand
   m_EditorClassIdentifier: 
-  Name: 
+  Name: Hand
   id: 0
   isStackable: 0
   slotAmountMax: 0
-  prefab: {fileID: 0}
+  uiDisplay: {fileID: 0}
   itemType: 2
   description: 
+  itemBuffs: []
   weaponType: 0
   weapon: 0
   attackDamage: 0

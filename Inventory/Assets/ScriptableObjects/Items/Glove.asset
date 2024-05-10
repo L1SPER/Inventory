@@ -12,12 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0082a1bf621bd844acc37043c1fa8cf, type: 3}
   m_Name: Glove
   m_EditorClassIdentifier: 
-  Name: 
+  Name: Glove
   id: 4
   isStackable: 0
   slotAmountMax: 1
   uiDisplay: {fileID: 2568506949165742456, guid: d07b803c54ae9fb4ebfc1e8a13b12f4c, type: 3}
   itemType: 1
   description: 
-  itemBuffs: []
+  itemBuffs:
+  - attributes: 6
+    value: 0
+    minValue: 0
+    maxValue: 0
   wearableType: 2

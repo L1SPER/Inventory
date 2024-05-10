@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a61fc81bbcbdea84a80ace0082f1e628, type: 3}
   m_Name: Trousers
   m_EditorClassIdentifier: 
-  Name: 
+  Name: Trousers
   id: 11
   isStackable: 0
   slotAmountMax: 1
@@ -27,7 +27,7 @@ MonoBehaviour:
   - attributes: 2
     value: 0
     minValue: 1
-    maxValue: 100
+    maxValue: 10
   - attributes: 0
     value: 0
     minValue: 1

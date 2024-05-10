@@ -8,24 +8,27 @@ using System.Security.Cryptography;
 using System.Xml.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 [CreateAssetMenu(fileName = "InventoryObject", menuName = "ItemObject/InventoryObject")]
 public class InventoryObject : ScriptableObject
 {
+    public int id;
     public string savePath;
+    public string Name;
     public Inventory Container;
     public ItemDatabaseObject database;
+
     public void AddItem(Item item)
     {
         if(!IsInventoryFull())
         {
-            //ItemObject itemObject = database.GetItem[].
-            if (!item.itemObject.isStackable)
+            if (!database.GetItem[item.id].isStackable)
             {
                 Container.Items[FindLastEmptySlot()].UpdateSlot(item, item.id, item.amount);
-                Destroy(item.gameObject);
+                //Destroy(item.gameObject);
             }
-            else if (item.itemObject.isStackable)
+            else if (database.GetItem[item.id].isStackable)
             {
                 for (int i = 0; i < Container.Items.Length; i++)
                 {
@@ -33,23 +36,23 @@ public class InventoryObject : ScriptableObject
                     if (Container.Items[i].id==item.id)
                     {
                         //Envanterde olan iteme ekledim.
-                        if(item.itemObject.slotAmountMax >= item.amount + Container.Items[i].amount)
+                        if(database.GetItem[item.id].slotAmountMax >= item.amount + Container.Items[i].amount)
                         {
                             Container.Items[i].amount+= item.amount;
-                            Destroy(item.gameObject);
+                            //Destroy(item.gameObject);
                         }
                         //Envanterde olmayan itemi ekledim.
                         else
                         {
-                            int remain = item.amount + Container.Items[i].amount - item.itemObject.slotAmountMax;
-                            Container.Items[i].amount = item.itemObject.slotAmountMax;
+                            int remain = item.amount + Container.Items[i].amount - database.GetItem[item.id].slotAmountMax;
+                            Container.Items[i].amount = database.GetItem[item.id].slotAmountMax;
 
                             //Fazlasýný envanterde yer varsa slot oluþturdum yoksa itemin miktarýný azalttým
                             if(!IsInventoryFull())
                             {
                                 //Arada bir yerde eðer boþ slot varsa diye son boþ slota koyuyorum
                                 Container.Items[FindLastEmptySlot() ].UpdateSlot(item, item.id, remain);
-                                Destroy(item.gameObject);
+                                //Destroy(item.gameObject);
                             }
                             else
                             {
@@ -61,7 +64,7 @@ public class InventoryObject : ScriptableObject
                     else
                     {
                         Container.Items[FindLastEmptySlot()].UpdateSlot(item, item.id, item.amount);
-                        Destroy(item.gameObject);
+                        //Destroy(item.gameObject);
                         break;
                     }
                 }

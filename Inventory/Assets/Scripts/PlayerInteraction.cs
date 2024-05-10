@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
@@ -55,21 +56,16 @@ public class PlayerInteraction : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
         {
-            Item item=hit.transform.GetComponent<Item>();
             IInteractable InteractableObj = hit.transform.GetComponent<IInteractable>();
             if (InteractableObj != null)
             {
                 InteractableObj.InteractWithoutPressingButton();
-                if (Input.GetButtonDown("Fire1")&&item)
-                {
-                    inventory.AddItem(item);
-                }
-                else if(Input.GetButtonDown("Fire1"))
+                if (Input.GetButtonDown("Fire1"))
                 {
                     InteractableObj.InteractWithPressingButton();
                 }
             }
-        }
+        } 
     }
     private void OnApplicationQuit()
     {

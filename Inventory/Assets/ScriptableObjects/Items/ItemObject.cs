@@ -22,10 +22,16 @@ public class ItemObject : ScriptableObject
     [TextArea(15, 20)]
     public string description;
 
-    public ItemBuff[] itemBuffs; 
-    //public Item CreateItem()
-    //{
-    //    Item newItem = new Item(this);
-    //    return newItem;
-    //}
+    public ItemBuff[] itemBuffs;
+    public Item CreateItem()
+    {
+        Item newItem = new Item(this);
+        return newItem;
+    }
+    public Item CreateItem(int _amount)
+    {
+        Item newItem = new Item(this);
+        newItem.amount = _amount; 
+        return newItem;
+    }
 }

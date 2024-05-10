@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed0e02fc73c1ca842a5dd44afe405b78, type: 3}
   m_Name: Glock
   m_EditorClassIdentifier: 
-  Name: 
+  Name: Glock
   id: 0
   isStackable: 0
   slotAmountMax: 0

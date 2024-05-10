@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03f0058168f72724b8b9997495e192e5, type: 3}
   m_Name: Ring
   m_EditorClassIdentifier: 
-  Name: 
+  Name: Ring
   id: 9
   isStackable: 0
   slotAmountMax: 1

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61466101caff3e1488d1aeea5c4f6cdc, type: 3}
   m_Name: Helmet
   m_EditorClassIdentifier: 
-  Name: 
+  Name: Helmet
   id: 6
   isStackable: 0
   slotAmountMax: 1

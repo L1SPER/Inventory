@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class DisplayInventory : MonoBehaviour
 {
@@ -43,7 +44,7 @@ public class DisplayInventory : MonoBehaviour
             if(slot.Value.id>=0)
             {
                 slot.Key.transform.GetChild(1).GetComponent<Image>().color = new Color(255, 255, 255, 255);
-                slot.Key.transform.GetChild(1).GetComponent<Image>().sprite = slot.Value.item.itemObject.uiDisplay;
+                slot.Key.transform.GetChild(1).GetComponent<Image>().sprite = inventory.database.GetItem[slot.Value.item.id].uiDisplay;
                 slot.Key.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = slot.Value.amount.ToString();
             }
             else

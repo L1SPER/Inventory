@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f34226c62815ca54493bbaa510e8f42d, type: 3}
   m_Name: Food
   m_EditorClassIdentifier: 
-  Name: 
+  Name: Food
   id: 2
   isStackable: 1
   slotAmountMax: 20
@@ -20,7 +20,7 @@ MonoBehaviour:
   itemType: 3
   description: 
   itemBuffs:
-  - attributes: 2
+  - attributes: 4
     value: 0
     minValue: 1
     maxValue: 10

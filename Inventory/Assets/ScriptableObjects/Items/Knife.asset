@@ -12,13 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef1547742c4612f46935f04e2b1c26aa, type: 3}
   m_Name: Knife
   m_EditorClassIdentifier: 
-  Name: 
+  Name: Knife
   id: 7
   isStackable: 0
   slotAmountMax: 1
   uiDisplay: {fileID: -3099154585137993449, guid: d07b803c54ae9fb4ebfc1e8a13b12f4c, type: 3}
   itemType: 2
   description: 
+  itemBuffs:
+  - attributes: 13
+    value: 0
+    minValue: 1
+    maxValue: 10
   weaponType: 0
   weapon: 1
   attackDamage: 0

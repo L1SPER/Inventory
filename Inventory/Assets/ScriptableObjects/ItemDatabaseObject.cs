@@ -7,7 +7,7 @@ using UnityEngine;
 public class ItemDatabaseObject : ScriptableObject,ISerializationCallbackReceiver
 {
     public ItemObject [] items;
-    public Dictionary<ItemObject, int> GetItem=new Dictionary<ItemObject, int>();
+    public Dictionary< int, ItemObject> GetItem=new Dictionary<int, ItemObject>();
 
     public void OnAfterDeserialize()
     {
@@ -18,11 +18,11 @@ public class ItemDatabaseObject : ScriptableObject,ISerializationCallbackReceive
             {
                 items[i].slotAmountMax = 1;
             }
-            GetItem.Add(items[i], i);
+            GetItem.Add(i, items[i]);
         }
     }
     public void OnBeforeSerialize()
     {
-        GetItem=new Dictionary<ItemObject, int>();
+        GetItem=new Dictionary< int, ItemObject>();
     }
 }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06d0b58981485484bab2230c083f1780, type: 3}
   m_Name: Potion
   m_EditorClassIdentifier: 
-  Name: 
+  Name: Potion
   id: 8
   isStackable: 0
   slotAmountMax: 1
