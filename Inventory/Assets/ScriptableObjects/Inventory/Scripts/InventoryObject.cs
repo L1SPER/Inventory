@@ -26,7 +26,6 @@ public class InventoryObject : ScriptableObject
             if (!database.GetItem[item.id].isStackable)
             {
                 Container.Items[FindLastEmptySlot()].UpdateSlot(item, item.id, item.amount);
-                //Destroy(item.gameObject);
             }
             else if (database.GetItem[item.id].isStackable)
             {
@@ -39,7 +38,6 @@ public class InventoryObject : ScriptableObject
                         if(database.GetItem[item.id].slotAmountMax >= item.amount + Container.Items[i].amount)
                         {
                             Container.Items[i].amount+= item.amount;
-                            //Destroy(item.gameObject);
                         }
                         //Envanterde olmayan itemi ekledim.
                         else
@@ -52,7 +50,6 @@ public class InventoryObject : ScriptableObject
                             {
                                 //Arada bir yerde eðer boþ slot varsa diye son boþ slota koyuyorum
                                 Container.Items[FindLastEmptySlot() ].UpdateSlot(item, item.id, remain);
-                                //Destroy(item.gameObject);
                             }
                             else
                             {
@@ -64,7 +61,6 @@ public class InventoryObject : ScriptableObject
                     else
                     {
                         Container.Items[FindLastEmptySlot()].UpdateSlot(item, item.id, item.amount);
-                        //Destroy(item.gameObject);
                         break;
                     }
                 }
@@ -74,6 +70,12 @@ public class InventoryObject : ScriptableObject
         {
             Debug.LogWarning("You cant add more items !!!");
         }
+    }
+    public void SwapItem(InventorySlot item1,InventorySlot item2)
+    {
+        InventorySlot temp = new InventorySlot(item2.item,item2.amount,item2.id);
+        item2.UpdateSlot(item1.item, item1.id, item1.amount);
+        item1.UpdateSlot(temp.item, temp.id, temp.amount);
     }
     [ContextMenu("Save")]
     public void Save()

@@ -29,11 +29,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform face;
 
     private bool canRun;
-    
     // Start is called before the first frame update
     void Start()
     {
         speedMultiplier = walkingSpeedMultiplier;
+        canRun = true;
     }
 
     // Update is called once per frame
@@ -60,16 +60,16 @@ public class PlayerMovement : MonoBehaviour
             speedMultiplier = walkingSpeedMultiplier;
             canRun = true;
         }
-        else if(Input.GetKeyDown(KeyCode.LeftShift)&&canRun)
+        else if (Input.GetKeyDown(KeyCode.LeftShift) && canRun)
         {
             speedMultiplier = runningSpeedMultiplier;
         }
-        else if(Input.GetKeyUp(KeyCode.LeftShift))
+        else if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             speedMultiplier = walkingSpeedMultiplier;
         }
-        
-        moveSpeed = face.forward * xSpeed* speedMultiplier + face.right * zSpeed* speedMultiplier;
+
+        moveSpeed = face.forward * xSpeed * speedMultiplier + face.right * zSpeed * speedMultiplier;
         transform.position += moveSpeed;
     }
 

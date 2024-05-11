@@ -13,15 +13,16 @@ public class PlayerInteraction : MonoBehaviour
     public readonly KeyCode inventoryKey = KeyCode.Tab;
     [SerializeField] private GameObject canvas;
     private bool isInventoryOpen;
-
+    private bool canHit;
     private void Start()
     {
-        isInventoryOpen = false;
+        isInventoryOpen = false; 
+        canHit = true;
     }
 
     private void Update()
     {
-        OpenInventory();
+        InventoryFunctions();
         Shoot();
         SaveLoadFunctions();
     }
@@ -37,27 +38,40 @@ public class PlayerInteraction : MonoBehaviour
         }
     }
 
-    private void OpenInventory()
+    private void InventoryFunctions()
     {
         if(Input.GetKeyDown(inventoryKey)&&!isInventoryOpen)
         {
-            canvas.gameObject.SetActive(true);
-            isInventoryOpen= true;
+            OpenInventory();
         }
         else if(Input.GetKeyDown(inventoryKey)&&isInventoryOpen)
         {
-            canvas.gameObject.SetActive(false);
-            isInventoryOpen = false;
+            CloseInventory();
         }
     }
-
+    private void OpenInventory()
+    {
+        canHit = false;
+        canvas.gameObject.SetActive(true);
+        isInventoryOpen = true;
+        FindObjectOfType<InventoryMouseUi>().isInventoryOpen = true;
+        GetComponentInChildren<CameraController>().canRotate = false;
+    }
+    private void CloseInventory()
+    {
+        canHit = true;
+        canvas.gameObject.SetActive(false);
+        isInventoryOpen = false;
+        FindObjectOfType<InventoryMouseUi>().isInventoryOpen = false;
+        GetComponentInChildren<CameraController>().canRotate = true;
+    }
     private void Shoot()
     {
         RaycastHit hit;
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
         {
             IInteractable InteractableObj = hit.transform.GetComponent<IInteractable>();
-            if (InteractableObj != null)
+            if (InteractableObj != null&&canHit)
             {
                 InteractableObj.InteractWithoutPressingButton();
                 if (Input.GetButtonDown("Fire1"))

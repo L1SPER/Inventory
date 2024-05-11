@@ -384,6 +384,7 @@
 "Assets/Scripts/GameManager.cs"
 "Assets/Scripts/IInteractable.cs"
 "Assets/Scripts/InventoryManager.cs"
+"Assets/Scripts/InventoryMouseUi.cs"
 "Assets/Scripts/ItemInfo.cs"
 "Assets/Scripts/PlayerInteraction.cs"
 "Assets/Scripts/PlayerMovement.cs"

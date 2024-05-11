@@ -14,10 +14,12 @@ public class CameraController : MonoBehaviour
     private float verticalAngle;
     private float horizontalAngle;
     [SerializeField] Transform playerBody;
+    public bool canRotate;
     // Start is called before the first frame update
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        canRotate = true;
     }
 
     // Update is called once per frame
@@ -28,16 +30,19 @@ public class CameraController : MonoBehaviour
 
     private void MoveCamera()
     {
-        horizontalInput = Input.GetAxis("Mouse X")*Time.deltaTime* xRotationSpeed;
-        verticalInput= Input.GetAxis("Mouse Y")*Time.deltaTime* yRotationSpeed;
+        if(canRotate)
+        {
+            horizontalInput = Input.GetAxis("Mouse X") * Time.deltaTime * xRotationSpeed;
+            verticalInput = Input.GetAxis("Mouse Y") * Time.deltaTime * yRotationSpeed;
 
-        playerBody.Rotate(Vector3.up * horizontalInput);
+            playerBody.Rotate(Vector3.up * horizontalInput);
 
-        verticalAngle -= verticalInput;
-        horizontalAngle += horizontalInput;
+            verticalAngle -= verticalInput;
+            horizontalAngle += horizontalInput;
 
-        verticalAngle = Mathf.Clamp(verticalAngle, -30f, 90f);
+            verticalAngle = Mathf.Clamp(verticalAngle, -30f, 90f);
 
-        transform.rotation=Quaternion.Euler(verticalAngle, horizontalAngle, 0f);
+            transform.rotation = Quaternion.Euler(verticalAngle, horizontalAngle, 0f);
+        }
     }
 }

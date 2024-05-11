@@ -6,7 +6,8 @@ public class InventoryManager : MonoBehaviour,ISerializationCallbackReceiver
 {
     public InventoryObject[] inventoryObjects;
     public Dictionary<int, InventoryObject> GetInventoryObject=new Dictionary<int, InventoryObject>();
-    public static InventoryManager Instance { get; private set; }
+    private static InventoryManager inventoryManager;
+    public static InventoryManager Instance{ get=> inventoryManager; set=> inventoryManager=value; }
 
     public void OnAfterDeserialize()
     {
