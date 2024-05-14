@@ -27,6 +27,13 @@ public class Item
         this.Name = _name;
         this.itemObject= _itemObject;
     }
+    public Item(int _id, int _amount, ItemObject _itemObject)
+    {
+        this.id = _id;
+        this.amount = _amount;
+        this.itemObject = _itemObject;
+        this.Name=_itemObject.Name;
+    }
     public Item(ItemObject itemObject)
     {
         this.itemObject= itemObject;

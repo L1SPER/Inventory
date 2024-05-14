@@ -7,10 +7,11 @@ public class GroundItem : MonoBehaviour, IInteractable
     public int id;
     public int amount;
     public string Name;
-    private void Awake()
+    private void Start()
     {
-        item = new Item(item.itemObject.id,amount,Name,item.itemObject);
+        item = new Item(item.itemObject.id, amount, item.itemObject);
         this.id = item.id;
+        this.Name = item.Name;
     }
     public void InteractWithoutPressingButton()
     {

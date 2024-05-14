@@ -10,6 +10,8 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField]
     private float range;
     public InventoryObject inventory;
+    public InventoryObject equipment;
+
     public readonly KeyCode inventoryKey = KeyCode.Tab;
     [SerializeField] private GameObject canvas;
     private bool isInventoryOpen;
@@ -31,10 +33,12 @@ public class PlayerInteraction : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             inventory.Save();
+            equipment.Save();
         }
         if (Input.GetKeyDown(KeyCode.KeypadEnter))
         {
             inventory.Load();
+            equipment.Load();
         }
     }
 
@@ -84,5 +88,6 @@ public class PlayerInteraction : MonoBehaviour
     private void OnApplicationQuit()
     {
         inventory.Container.Items = new InventorySlot[30];
+        equipment.Container.Items=new InventorySlot[7];
     }
 }

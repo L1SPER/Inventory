@@ -380,7 +380,7 @@
 "Assets/ScriptableObjects/Items/WearableItems/Scripts/Shoe.cs"
 "Assets/ScriptableObjects/Items/WearableItems/Scripts/Trousers.cs"
 "Assets/Scripts/CameraController.cs"
-"Assets/Scripts/DisplayInventory.cs"
+"Assets/Scripts/DynamicInterface.cs"
 "Assets/Scripts/GameManager.cs"
 "Assets/Scripts/IInteractable.cs"
 "Assets/Scripts/InventoryManager.cs"
@@ -388,6 +388,8 @@
 "Assets/Scripts/ItemInfo.cs"
 "Assets/Scripts/PlayerInteraction.cs"
 "Assets/Scripts/PlayerMovement.cs"
+"Assets/Scripts/StaticInterface.cs"
+"Assets/Scripts/UserInterface.cs"
 -langversion:9.0
 
 /deterministic

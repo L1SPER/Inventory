@@ -18,6 +18,7 @@ public class InventoryObject : ScriptableObject
     public string Name;
     public Inventory Container;
     public ItemDatabaseObject database;
+    public UserInterface type;
 
     public void AddItem(Item item)
     {
@@ -25,7 +26,7 @@ public class InventoryObject : ScriptableObject
         {
             if (!database.GetItem[item.id].isStackable)
             {
-                Container.Items[FindLastEmptySlot()].UpdateSlot(item, item.id, item.amount);
+                Container.Items[FindLastEmptySlotNumber()].UpdateSlot(item, item.id, item.amount);
             }
             else if (database.GetItem[item.id].isStackable)
             {
@@ -49,7 +50,7 @@ public class InventoryObject : ScriptableObject
                             if(!IsInventoryFull())
                             {
                                 //Arada bir yerde eðer boþ slot varsa diye son boþ slota koyuyorum
-                                Container.Items[FindLastEmptySlot() ].UpdateSlot(item, item.id, remain);
+                                Container.Items[FindLastEmptySlotNumber() ].UpdateSlot(item, item.id, remain);
                             }
                             else
                             {
@@ -60,7 +61,7 @@ public class InventoryObject : ScriptableObject
                     //Envanterde yoksa itemi ekliyorum.
                     else
                     {
-                        Container.Items[FindLastEmptySlot()].UpdateSlot(item, item.id, item.amount);
+                        Container.Items[FindLastEmptySlotNumber()].UpdateSlot(item, item.id, item.amount);
                         break;
                     }
                 }
@@ -152,7 +153,7 @@ public class InventoryObject : ScriptableObject
         }
         
     }
-    public int FindLastEmptySlot()
+    public int FindLastEmptySlotNumber()
     {
         for (int i = 0; i<Container.Items.Length; i++)
         {
@@ -177,7 +178,11 @@ public class Inventory
 [System.Serializable]
 public class InventorySlot
 {
+    public ItemType[] allowedItems = new ItemType[0]; 
     public Item item=new Item();
+    [System.NonSerialized]
+    public UserInterface parent;
+    public int parentId;
     public int id;
     public int amount;
     public InventorySlot()
@@ -192,11 +197,25 @@ public class InventorySlot
         this.amount = _amount;
         this.id = _id;
     }
+    //public InventorySlot(Item _item, int _amount, int _id, int _parentId)
+    //{
+    //    this.item = _item;
+    //    this.amount = _amount;
+    //    this.id = _id;
+    //    this.parentId = _parentId;
+    //}
     public void UpdateSlot(Item _item,int _id, int _amount)
     {
         this.item = _item;
         this.amount = _amount;
         this.id = _id;
+    }
+    public void UpdateSlot(Item _item, int _id, int _amount,int _parentId)
+    {
+        this.item = _item;
+        this.amount = _amount;
+        this.id = _id;
+        this.parentId= _parentId;
     }
     public void AddAmount(int amount)
     {
@@ -207,5 +226,20 @@ public class InventorySlot
         this.item = new Item();
         this.id = -1;
         this.amount= 0;
+    }
+    public bool CanPlaceInSlot(ItemObject _item)
+    {
+        if(allowedItems.Length<=0)
+        {
+            return true;
+        }
+        for (int i = 0; i < allowedItems.Length; i++)
+        {
+            if (_item.itemType == allowedItems[i])
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }

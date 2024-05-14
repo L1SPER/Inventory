@@ -9,37 +9,16 @@ public class ItemInfo : MonoBehaviour
 {
     private GameObject canvasGameObject;
     public bool openCanvas;
+
     private void Start()
     {
         CreateCanvas();
     }
-
     private void CreateCanvas()
     {
         CreateItemInfoCanvas();
         CreateGameObject();
     }
-
-    private void CreateGameObject()
-    {
-        GameObject textGameObject = new GameObject();
-        textGameObject.name = "ItemName";
-        textGameObject.AddComponent<TextMeshProUGUI>();
-        textGameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(transform.position.x, transform.position.y);
-        textGameObject.GetComponent<RectTransform>().position = canvasGameObject.GetComponent<RectTransform>().position/*+new Vector3(0f, 1f, 0f)*/;
-        textGameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(390, 80);
-        textGameObject.GetComponent<RectTransform>().localScale = new Vector3(0.006318337f, 0.006318337f, 0.006318337f);
-
-        textGameObject.GetComponent<TextMeshProUGUI>().fontStyle = (FontStyles)FontStyle.Bold;
-        textGameObject.GetComponent<TextMeshProUGUI>().fontSize = 60;
-        textGameObject.GetComponent<TextMeshProUGUI>().alignment = TextAlignmentOptions.Center;
-        textGameObject.GetComponent<RectTransform>().rotation = Quaternion.Euler(0, 0, 0);
-        textGameObject.transform.SetParent(canvasGameObject.transform);
-        //textGameObject.GetComponent<TextMeshProUGUI>().text = GetComponent<GroundItem>().item.Name;
-        canvasGameObject.SetActive(false);
-        //this.name = GetComponent<GroundItem>().item.Name;
-    }
-
     private void CreateItemInfoCanvas()
     {
         canvasGameObject = new GameObject();
@@ -54,7 +33,25 @@ public class ItemInfo : MonoBehaviour
         canvasGameObject.name = "ItemInfoCanvas";
         canvasGameObject.transform.SetParent(this.transform);
     }
+    private void CreateGameObject()
+    {
+        GameObject textGameObject = new GameObject();
+        textGameObject.name = "ItemName";
+        textGameObject.AddComponent<TextMeshProUGUI>();
+        textGameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(transform.position.x, transform.position.y);
+        textGameObject.GetComponent<RectTransform>().position = canvasGameObject.GetComponent<RectTransform>().position/*+new Vector3(0f, 1f, 0f)*/;
+        textGameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(390, 80);
+        textGameObject.GetComponent<RectTransform>().localScale = new Vector3(0.006318337f, 0.006318337f, 0.006318337f);
 
+        textGameObject.GetComponent<TextMeshProUGUI>().fontStyle = (FontStyles)FontStyle.Bold;
+        textGameObject.GetComponent<TextMeshProUGUI>().fontSize = 60;
+        textGameObject.GetComponent<TextMeshProUGUI>().alignment = TextAlignmentOptions.Center;
+        textGameObject.GetComponent<RectTransform>().rotation = Quaternion.Euler(0, 0, 0);
+        textGameObject.GetComponent<TextMeshProUGUI>().text = GetComponent<GroundItem>().Name;
+        textGameObject.transform.SetParent(canvasGameObject.transform);
+        canvasGameObject.SetActive(false);
+        this.name = GetComponent<GroundItem>().Name;
+    }
     public void OpenCanvas()
     {
         if (canvasGameObject != null && openCanvas)
@@ -63,7 +60,6 @@ public class ItemInfo : MonoBehaviour
             canvasGameObject.transform.rotation = Quaternion.LookRotation(canvasGameObject.transform.position - Camera.main.transform.position);
         }
     }
-
     public void CloseCanvas()
     {
         if (canvasGameObject != null && !openCanvas)

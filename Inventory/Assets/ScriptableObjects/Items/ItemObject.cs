@@ -23,15 +23,15 @@ public class ItemObject : ScriptableObject
     public string description;
 
     public ItemBuff[] itemBuffs;
-    public Item CreateItem()
-    {
-        Item newItem = new Item(this);
-        return newItem;
-    }
-    public Item CreateItem(int _amount)
-    {
-        Item newItem = new Item(this);
-        newItem.amount = _amount; 
-        return newItem;
-    }
+    //public Item CreateItem()
+    //{
+    //    Item newItem = new Item(this);
+    //    return newItem;
+    //}
+    //public Item CreateItem(int _amount)
+    //{
+    //    Item newItem = new Item(this);
+    //    newItem.amount = _amount; 
+    //    return newItem;
+    //}
 }
