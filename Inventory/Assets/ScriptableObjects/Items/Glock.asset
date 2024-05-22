@@ -17,7 +17,7 @@ MonoBehaviour:
   isStackable: 0
   slotAmountMax: 0
   uiDisplay: {fileID: 0}
-  itemType: 2
+  itemType: 8
   description: 
   itemBuffs: []
   weaponType: 1

@@ -23,20 +23,19 @@ public abstract class UserInterface : MonoBehaviour
     private void Update()
     {
         slotsOnInterface.UpdateSlotDisplay();
-        //Debug.Log(slotsOnInterface.Count);
-        Debug.Log(MouseData.slotInterfacetID);
+        //Debug.Log(MouseData.slotId);
     }
     private void OnEnable()
     {
-        for (int i = 0; i < inventory.Container.Items.Length; i++)
+        for (int i = 0; i < inventory.Container.Slots.Length; i++)
         {
-            inventory.Container.Items[i].parent = this;
-            inventory.Container.Items[i].parentId = 0;
+            inventory.Container.Slots[i].parent = this;
+            inventory.Container.Slots[i].parentId = 0;
         }
-        for (int i = 0; i < equipment.Container.Items.Length; i++)
+        for (int i = 0; i < equipment.Container.Slots.Length; i++)
         {
-            equipment.Container.Items[i].parent = this;
-            equipment.Container.Items[i].parentId = 1;
+            equipment.Container.Slots[i].parent = this;
+            equipment.Container.Slots[i].parentId = 1;
         }
         AddEvent(gameObject, EventTriggerType.PointerEnter, delegate { OnEnterInterface(gameObject); });
         AddEvent(gameObject, EventTriggerType.PointerExit, delegate { OnExitInterface(gameObject); });
@@ -105,7 +104,6 @@ public abstract class UserInterface : MonoBehaviour
         if(MouseData.interfaceMouseIsOver==null)
         {
             Vector3 offset = new Vector3(0f, 0f, 3f);
-            //GameObject tempBox = Instantiate(boxPrefab , faceTransform.transform.position+offset,Quaternion.identity,environment.transform);;
             GameObject tempBox = Instantiate(boxPrefab, faceTransform.transform.position, Quaternion.identity, environment.transform);
             tempBox.GetComponent<GroundItem>().id = slotsOnInterface[obj].id;
             tempBox.GetComponent<GroundItem>().amount= slotsOnInterface[obj].amount;
@@ -113,10 +111,17 @@ public abstract class UserInterface : MonoBehaviour
             slotsOnInterface[obj].RemoveItem();
             return;
         }
-        if(MouseData.slotHoveredOver)
+        if(MouseData.slotHoveredOver&& slotsOnInterface[obj].id>=0)
         {
-            InventorySlot slot= MouseData.interfaceMouseIsOver.slotsOnInterface[MouseData.slotHoveredOver];
-            inventory.SwapItem(slotsOnInterface[obj],slot);
+            InventorySlot slot = new InventorySlot(InventoryManager.Instance.GetInventoryObject[MouseData.slotInterfacetID].type.slotsOnInterface[MouseData.slotHoveredOver].item,
+                                                   InventoryManager.Instance.GetInventoryObject[MouseData.slotInterfacetID].type.slotsOnInterface[MouseData.slotHoveredOver].id,
+                                                   InventoryManager.Instance.GetInventoryObject[MouseData.slotInterfacetID].type.slotsOnInterface[MouseData.slotHoveredOver].amount,
+                                                   InventoryManager.Instance.GetInventoryObject[MouseData.slotInterfacetID].type.slotsOnInterface[MouseData.slotHoveredOver].parentId,
+                                                   InventoryManager.Instance.GetInventoryObject[MouseData.slotInterfacetID].type.slotsOnInterface[MouseData.slotHoveredOver].slotId
+                                                   ); /*MouseData.interfaceMouseIsOver.slotsOnInterface[MouseData.slotHoveredOver];*/
+
+            InventoryManager.Instance.SwapSlots(slotsOnInterface[obj], slot);
+            slotsOnInterface.UpdateSlotDisplay();
         }
     }
     public void OnDrag(GameObject obj)
@@ -147,11 +152,4 @@ public static class ExtensionMethods
             }
         }
     }
-}
-public static class MouseData
-{
-    public static UserInterface interfaceMouseIsOver;
-    public static GameObject tempItemBeingDragged; 
-    public static GameObject slotHoveredOver;
-    public static int slotInterfacetID;
 }

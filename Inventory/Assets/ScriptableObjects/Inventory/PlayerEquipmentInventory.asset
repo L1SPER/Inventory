@@ -16,76 +16,94 @@ MonoBehaviour:
   savePath: /equipment.Save
   Name: PlayerEquipment
   Container:
-    Items:
-    - allowedItems: 
+    Slots:
+    - allowedItems: 00000000
       item:
         id: -1
         amount: 0
         Name: 
         itemObject: {fileID: 0}
         buffs: []
-      parentId: 0
+      parentId: 1
       id: -1
       amount: 0
-    - allowedItems: 
+      slotId: 0
+    - allowedItems: 01000000
       item:
         id: -1
         amount: 0
         Name: 
         itemObject: {fileID: 0}
         buffs: []
-      parentId: 0
+      parentId: 1
       id: -1
       amount: 0
-    - allowedItems: 
+      slotId: 1
+    - allowedItems: 03000000
       item:
         id: -1
         amount: 0
         Name: 
         itemObject: {fileID: 0}
         buffs: []
-      parentId: 0
+      parentId: 1
       id: -1
       amount: 0
-    - allowedItems: 
+      slotId: 2
+    - allowedItems: 04000000
       item:
         id: -1
         amount: 0
         Name: 
         itemObject: {fileID: 0}
         buffs: []
-      parentId: 0
+      parentId: 1
       id: -1
       amount: 0
-    - allowedItems: 
+      slotId: 3
+    - allowedItems: 02000000
       item:
         id: -1
         amount: 0
         Name: 
         itemObject: {fileID: 0}
         buffs: []
-      parentId: 0
+      parentId: 1
       id: -1
       amount: 0
-    - allowedItems: 
+      slotId: 4
+    - allowedItems: 05000000
       item:
         id: -1
         amount: 0
         Name: 
         itemObject: {fileID: 0}
         buffs: []
-      parentId: 0
+      parentId: 1
       id: -1
       amount: 0
-    - allowedItems: 
+      slotId: 5
+    - allowedItems: 06000000
       item:
         id: -1
         amount: 0
         Name: 
         itemObject: {fileID: 0}
         buffs: []
-      parentId: 0
+      parentId: 1
       id: -1
       amount: 0
+      slotId: 6
+    - allowedItems: 07000000
+      item:
+        id: -1
+        amount: 0
+        Name: 
+        itemObject: {fileID: 0}
+        buffs: []
+      parentId: 1
+      id: -1
+      amount: 0
+      slotId: 7
   database: {fileID: 11400000, guid: 65793cceb6ac0054a941ed7453ea9b46, type: 2}
   type: {fileID: 0}

@@ -7,7 +7,7 @@ public class Knife : WeaponItems
 {
     private void Awake()
     {
-        itemType = ItemType.Weapons;
+        //itemType = ItemType.Weapons;
         weaponType = WeaponType.MeleeWeapon;
         weapon = Weapon.Knife;
     }

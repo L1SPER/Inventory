@@ -28,9 +28,9 @@ public class DynamicInterface : UserInterface
     }
     public override void CreateSlots()
     {
-        for (int i = 0; i < inventory.Container.Items.Length; i++)
+        for (int i = 0; i < inventory.Container.Slots.Length; i++)
         {
-            InventorySlot slot = inventory.Container.Items[i];
+            InventorySlot slot = inventory.GetSlots[i];
 
             var obj = Instantiate(itemSlotPrefab, Vector3.zero, Quaternion.identity, transform);
             obj.GetComponent<RectTransform>().localPosition = GetPosition(i);

@@ -17,7 +17,7 @@ MonoBehaviour:
   isStackable: 0
   slotAmountMax: 1
   uiDisplay: {fileID: -3237844493445452581, guid: d07b803c54ae9fb4ebfc1e8a13b12f4c, type: 3}
-  itemType: 3
+  itemType: 8
   description: 
   itemBuffs:
   - attributes: 5

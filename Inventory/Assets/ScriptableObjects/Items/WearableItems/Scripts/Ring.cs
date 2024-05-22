@@ -7,7 +7,8 @@ public class Ring : WearableItems
 {
     private void Awake()
     {
-        itemType = ItemType.WearableItems;
+        //itemType = ItemType.WearableItems;
+        itemType = Items.Ring;
         wearableType = WearableType.Ring;
     }
 }

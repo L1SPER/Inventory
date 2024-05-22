@@ -87,7 +87,11 @@ public class PlayerInteraction : MonoBehaviour
     }
     private void OnApplicationQuit()
     {
-        inventory.Container.Items = new InventorySlot[30];
-        equipment.Container.Items=new InventorySlot[7];
+        inventory.Container.Slots = new InventorySlot[30];
+        for (int i = 0; i < equipment.GetSlots.Length; i++)
+        {
+            equipment.GetSlots[i].UpdateSlot(null,-1,0, equipment.GetSlots[i].parentId, equipment.GetSlots[i].slotId, equipment.GetSlots[i].allowedItems);
+        }
+        //equipment.Container.Slots = new InventorySlot[7];
     }
 }

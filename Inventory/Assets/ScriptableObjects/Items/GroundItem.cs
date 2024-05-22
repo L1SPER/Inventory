@@ -12,6 +12,7 @@ public class GroundItem : MonoBehaviour, IInteractable
         item = new Item(item.itemObject.id, amount, item.itemObject);
         this.id = item.id;
         this.Name = item.Name;
+        this.gameObject.name = this.Name;
     }
     public void InteractWithoutPressingButton()
     {

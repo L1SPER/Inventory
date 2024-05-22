@@ -7,7 +7,8 @@ public class Glove : WearableItems
 {
     private void Awake()
     {
-        itemType = ItemType.WearableItems;
+        //itemType = ItemType.WearableItems;
+        itemType = Items.Glove;
         wearableType = WearableType.Glove;
     }
 }

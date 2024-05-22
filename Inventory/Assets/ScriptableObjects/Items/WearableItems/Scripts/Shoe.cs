@@ -7,7 +7,8 @@ public class Shoe : WearableItems
 {
     private void Awake()
     {
-        itemType = ItemType.WearableItems;
+        //itemType = ItemType.WearableItems;
+        itemType = Items.Shoe;
         wearableType = WearableType.Shoe;
     }
 }

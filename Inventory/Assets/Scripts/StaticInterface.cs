@@ -13,9 +13,9 @@ public class StaticInterface : UserInterface
     }
     public override void CreateSlots()
     {
-        for (int i = 0; i < equipment.Container.Items.Length; i++)
+        for (int i = 0; i < equipment.GetSlots.Length; i++)
         {
-            InventorySlot slot = equipment.Container.Items[i];
+            InventorySlot slot = equipment.GetSlots[i];
             
             var obj= slots[i];
             AddEvent(obj, EventTriggerType.PointerEnter, delegate { OnEnter(obj); });

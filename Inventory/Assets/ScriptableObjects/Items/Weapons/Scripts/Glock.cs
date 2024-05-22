@@ -7,7 +7,7 @@ public class Glock : WeaponItems
 {
     private void Awake()
     {
-        itemType = ItemType.Weapons;
+        //itemType = ItemType.Weapons;
         weaponType = WeaponType.RangedWeapon;
         weapon = Weapon.Glock;
     }

@@ -7,7 +7,7 @@ public class Potion : ConsumableItems
 {
     private void Awake()
     {
-        itemType = ItemType.ConsumableItems;
+        //itemType = ItemType.ConsumableItems;
         consumeType = ConsumeType.Potion;
     }
     public override void Use()

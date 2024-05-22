@@ -7,7 +7,8 @@ public class ChestArmor : WearableItems
 {
     private void Awake()
     {
-        itemType = ItemType.WearableItems;
+        //itemType = ItemType.WearableItems;
+        itemType = Items.ChestArmor;
         wearableType = WearableType.ChestArmor;
     }
 }

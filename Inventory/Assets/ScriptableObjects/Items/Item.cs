@@ -34,17 +34,24 @@ public class Item
         this.itemObject = _itemObject;
         this.Name=_itemObject.Name;
     }
-    public Item(ItemObject itemObject)
+    public void UpdateItem(Item _item)
     {
-        this.itemObject= itemObject;
-        this.id= itemObject.id;
-        this.Name= itemObject.Name;  
-        this.buffs=new ItemBuff[itemObject.itemBuffs.Length];
+        this.id= _item.id;
+        this.amount=_item.amount;
+        this.itemObject = _item.itemObject;
+        this.Name = _item.itemObject.Name;
+    }
+    public Item(ItemObject _itemObject)
+    {
+        this.itemObject= _itemObject;
+        this.id= _itemObject.id;
+        this.Name= _itemObject.Name;  
+        this.buffs=new ItemBuff[_itemObject.itemBuffs.Length];
         for (int i = 0; i < buffs.Length; i++)
         {
-            buffs[i] = new ItemBuff(itemObject.itemBuffs[i].minValue, itemObject.itemBuffs[i].maxValue)
+            buffs[i] = new ItemBuff(_itemObject.itemBuffs[i].minValue, _itemObject.itemBuffs[i].maxValue)
             {
-                attributes = itemObject.itemBuffs[i].attributes
+                attributes = _itemObject.itemBuffs[i].attributes
             };
         }
     }

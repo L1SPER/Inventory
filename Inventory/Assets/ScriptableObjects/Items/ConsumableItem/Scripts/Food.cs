@@ -7,7 +7,7 @@ public class Food : ConsumableItems
 {
     private void Awake()
     {
-        itemType = ItemType.ConsumableItems;
+        //itemType = ItemType.ConsumableItems;
         consumeType = ConsumeType.Food;
     }
     public override void Use()
