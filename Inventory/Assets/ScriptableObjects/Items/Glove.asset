@@ -17,11 +17,11 @@ MonoBehaviour:
   isStackable: 0
   slotAmountMax: 1
   uiDisplay: {fileID: 2568506949165742456, guid: d07b803c54ae9fb4ebfc1e8a13b12f4c, type: 3}
-  itemType: 1
+  itemType: 2
   description: 
   itemBuffs:
   - attributes: 6
     value: 0
-    minValue: 0
-    maxValue: 0
+    minValue: 1
+    maxValue: 10
   wearableType: 2

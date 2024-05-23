@@ -30,12 +30,12 @@ public class PlayerInteraction : MonoBehaviour
     }
     private void SaveLoadFunctions()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space)&& isInventoryOpen)
         {
             inventory.Save();
             equipment.Save();
         }
-        if (Input.GetKeyDown(KeyCode.KeypadEnter))
+        if (Input.GetKeyDown(KeyCode.KeypadEnter)&& isInventoryOpen)
         {
             inventory.Load();
             equipment.Load();
