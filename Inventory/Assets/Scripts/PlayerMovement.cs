@@ -29,20 +29,33 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform face;
 
     private bool canRun;
-    // Start is called before the first frame update
+    private bool isRunning;
+
+    [Header("Stamina Main Parameters")]
+    [SerializeField] private float currentStamina;
+    [SerializeField] private float maxStamina = 100f;
+
+    [Header("Stamina Regen Parameters")]
+    [Range(0, 50)][SerializeField] private float staminaDrain=20;
+    [Range(0, 50)][SerializeField] private float staminaRegen=5;
+
+    public StaminaBar staminaBar;
+
     void Start()
     {
-        speedMultiplier = walkingSpeedMultiplier;
         canRun = true;
+        isRunning= false;
+        speedMultiplier = walkingSpeedMultiplier;
+        currentStamina = maxStamina;
+        staminaBar.SetMaxStamina(maxStamina);
     }
-
-    // Update is called once per frame
     void Update()
     {
+        StaminaControl();
         GroundCheck();
         Movement();
+        Debug.Log("isRunning : " + canRun);
     }
-
     private void Movement()
     {
         xSpeed = Input.GetAxis("Vertical");
@@ -63,16 +76,17 @@ public class PlayerMovement : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.LeftShift) && canRun)
         {
             speedMultiplier = runningSpeedMultiplier;
+            isRunning = true;
         }
-        else if (Input.GetKeyUp(KeyCode.LeftShift))
+        else if (Input.GetKeyUp(KeyCode.LeftShift) || !canRun)
         {
             speedMultiplier = walkingSpeedMultiplier;
+            isRunning = false;
         }
 
         moveSpeed = face.forward * xSpeed * speedMultiplier + face.right * zSpeed * speedMultiplier;
         transform.position += moveSpeed;
     }
-
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -81,5 +95,37 @@ public class PlayerMovement : MonoBehaviour
     private bool GroundCheck()
     {
         return isGrounded=Physics.CheckSphere(groundCheck.transform.position, groundCheckRadius, groundLayer);
+    }
+    private void StaminaControl()
+    {
+        if (!isRunning)
+            RegenerateStamina();
+        else if(isRunning)
+            DrainStamina();
+
+        if(currentStamina<=0)
+        {
+            canRun = false;
+            currentStamina = 0;
+        }
+        else
+            canRun = true;
+    }
+    public void DrainStamina()
+    {
+        currentStamina -= staminaDrain * Time.deltaTime;
+        staminaBar.SetStamina(currentStamina);
+    }
+    private void RegenerateStamina()
+    {
+        if (currentStamina <= maxStamina - 0.01)
+        {
+            currentStamina += staminaRegen * Time.deltaTime;
+            if (currentStamina >= maxStamina)
+            {
+                currentStamina = maxStamina;
+            }
+            staminaBar.SetStamina(currentStamina);
+        }
     }
 }

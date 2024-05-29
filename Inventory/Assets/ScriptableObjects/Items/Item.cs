@@ -61,8 +61,6 @@ public class Item
             {
                 buffs[i].attributes= _itemBuffs[i].attributes;
             };
-            //this.buffs[i] = _itemBuffs[i];
-            //this.buffs[i].attributes = _itemBuffs[i].attributes;
         }
     }
 }
