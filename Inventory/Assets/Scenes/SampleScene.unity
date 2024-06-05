@@ -20770,7 +20770,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 471908812}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 238, y: 180, z: -224}
+  m_LocalPosition: {x: 20, y: 180, z: 56}
   m_LocalScale: {x: 1, y: 1.0000002, z: 1.0000002}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -20832,6 +20832,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e942da526c46bea4f8010cbd7755cc96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minXZoomOutBorder: 250
+  maxXZoomOutBorder: 300
+  minZZoomOutBorder: -500
+  maxZZoomOutBorder: -50
+  minXZoomInBorder: 50
+  maxXZoomInBorder: 450
+  minZZoomInBorder: -600
+  maxZZoomInBorder: 50
   player: {fileID: 302877346}
   cam: {fileID: 471908815}
   zoomMultiplier: 100

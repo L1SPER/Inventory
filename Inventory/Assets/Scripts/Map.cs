@@ -6,6 +6,16 @@ using UnityEngine;
 
 public class Map : MonoBehaviour
 {
+    [SerializeField] float minXZoomOutBorder;
+    [SerializeField] float maxXZoomOutBorder;
+    [SerializeField] float minZZoomOutBorder;
+    [SerializeField] float maxZZoomOutBorder;
+
+    [SerializeField] float minXZoomInBorder;
+    [SerializeField] float maxXZoomInBorder;
+    [SerializeField] float minZZoomInBorder;
+    [SerializeField] float maxZZoomInBorder;
+
     [SerializeField] private Transform player;
     [Header("Map Attributes")]
 
@@ -32,6 +42,14 @@ public class Map : MonoBehaviour
     {
         ZoomInAndOutMap();
         MouseDrag();
+        ClampBorders();
+    }
+    private void ClampBorders()
+    {
+        Vector3 tmpPos = transform.position;
+        tmpPos.x = Math.Clamp(transform.position.x, minXZoomInBorder, maxXZoomInBorder);
+        tmpPos.z = Math.Clamp(transform.position.z, minZZoomInBorder, maxZZoomInBorder);
+        transform.position = tmpPos;
     }
     private void ZoomInAndOutMap()
     {
