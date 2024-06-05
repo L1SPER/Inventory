@@ -54,7 +54,6 @@ public class PlayerMovement : MonoBehaviour
         StaminaControl();
         GroundCheck();
         Movement();
-        Debug.Log("isRunning : " + canRun);
     }
     private void Movement()
     {

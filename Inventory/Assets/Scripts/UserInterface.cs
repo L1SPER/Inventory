@@ -23,7 +23,6 @@ public abstract class UserInterface : MonoBehaviour
     private void Update()
     {
         slotsOnInterface.UpdateSlotDisplay();
-        //Debug.Log(MouseData.slotId);
     }
     private void OnEnable()
     {
@@ -118,7 +117,7 @@ public abstract class UserInterface : MonoBehaviour
                                                    InventoryManager.Instance.GetInventoryObject[MouseData.slotInterfacetID].type.slotsOnInterface[MouseData.slotHoveredOver].amount,
                                                    InventoryManager.Instance.GetInventoryObject[MouseData.slotInterfacetID].type.slotsOnInterface[MouseData.slotHoveredOver].parentId,
                                                    InventoryManager.Instance.GetInventoryObject[MouseData.slotInterfacetID].type.slotsOnInterface[MouseData.slotHoveredOver].slotId
-                                                   ); /*MouseData.interfaceMouseIsOver.slotsOnInterface[MouseData.slotHoveredOver];*/
+                                                   ); 
 
             InventoryManager.Instance.SwapSlots(slotsOnInterface[obj], slot);
             slotsOnInterface.UpdateSlotDisplay();

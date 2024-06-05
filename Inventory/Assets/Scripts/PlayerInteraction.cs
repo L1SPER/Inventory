@@ -1,73 +1,107 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
 {
-    public Camera fpsCam;
     [SerializeField]
     private float range;
     public InventoryObject inventory;
     public InventoryObject equipment;
+    
+    public readonly KeyCode inventoryKey = KeyCode.I;
+    public readonly KeyCode mapKey = KeyCode.M;
 
-    public readonly KeyCode inventoryKey = KeyCode.Tab;
-    [SerializeField] private GameObject canvas;
+    [SerializeField] private GameObject inventoryCanvas;
+    [SerializeField] private GameObject mapCanvas;
+
+    [Header("Cams")]
+    [SerializeField] private Camera fpsCam;
+    [SerializeField] private Camera mapCam;
+
     private bool isInventoryOpen;
+    private bool isMapOpen;
     private bool canHit;
+
     private void Start()
     {
-        isInventoryOpen = false; 
+        isInventoryOpen = false;
+        isMapOpen= false;
         canHit = true;
     }
-
     private void Update()
     {
-        InventoryFunctions();
         Shoot();
+        InventoryFunctions();
         SaveLoadFunctions();
     }
     private void SaveLoadFunctions()
     {
-        if (Input.GetKeyDown(KeyCode.Space)&& isInventoryOpen)
+        if (Input.GetKeyDown(KeyCode.Space)&& isInventoryOpen&&!isMapOpen)
         {
             inventory.Save();
             equipment.Save();
         }
-        if (Input.GetKeyDown(KeyCode.KeypadEnter)&& isInventoryOpen)
+        if (Input.GetKeyDown(KeyCode.KeypadEnter)&& isInventoryOpen&&!isMapOpen)
         {
             inventory.Load();
             equipment.Load();
         }
     }
-
     private void InventoryFunctions()
     {
         if(Input.GetKeyDown(inventoryKey)&&!isInventoryOpen)
         {
+            CloseMap();
             OpenInventory();
         }
         else if(Input.GetKeyDown(inventoryKey)&&isInventoryOpen)
         {
             CloseInventory();
         }
+        else if(Input.GetKeyDown(mapKey)&&!isMapOpen)
+        {
+            CloseInventory();
+            OpenMap();
+        }
+        else if(Input.GetKeyDown(mapKey)&&isMapOpen)
+        {
+            CloseMap();
+        }
     }
     private void OpenInventory()
     {
         canHit = false;
-        canvas.gameObject.SetActive(true);
         isInventoryOpen = true;
+        inventoryCanvas.gameObject.SetActive(true);
         FindObjectOfType<InventoryMouseUi>().isInventoryOpen = true;
-        GetComponentInChildren<CameraController>().canRotate = false;
+        GetComponentInChildren<FPSCameraController>().canRotate = false;
     }
     private void CloseInventory()
     {
         canHit = true;
-        canvas.gameObject.SetActive(false);
         isInventoryOpen = false;
+        inventoryCanvas.gameObject.SetActive(false);
         FindObjectOfType<InventoryMouseUi>().isInventoryOpen = false;
-        GetComponentInChildren<CameraController>().canRotate = true;
+        GetComponentInChildren<FPSCameraController>().canRotate = true;
+    }
+    private void OpenMap()
+    {
+        isMapOpen= true;
+        mapCanvas.gameObject.SetActive(true);
+        FindObjectOfType<InventoryMouseUi>().isMapOpen = true;
+        FindObjectOfType<Map>().camStartPos = mapCam.transform.position;
+        GetComponentInChildren<FPSCameraController>().canRotate = false;
+    }
+    private void CloseMap()
+    {
+        isMapOpen = false;
+        mapCanvas.gameObject.SetActive(false);
+        FindObjectOfType<InventoryMouseUi>().isMapOpen=false;
+        GetComponentInChildren<FPSCameraController>().canRotate = true;
     }
     private void Shoot()
     {
