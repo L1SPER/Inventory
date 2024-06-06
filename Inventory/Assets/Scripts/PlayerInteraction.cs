@@ -26,6 +26,8 @@ public class PlayerInteraction : MonoBehaviour
     private bool isMapOpen;
     private bool canHit;
 
+    [SerializeField] private Transform playerUi;
+
     private void Start()
     {
         isInventoryOpen = false;
@@ -92,12 +94,14 @@ public class PlayerInteraction : MonoBehaviour
     {
         isMapOpen= true;
         mapCanvas.gameObject.SetActive(true);
+        playerUi.localScale = new Vector3(15f, 15f, 15f);
         FindObjectOfType<InventoryMouseUi>().isMapOpen = true;
         FindObjectOfType<Map>().camStartPos = mapCam.transform.position;
         GetComponentInChildren<FPSCameraController>().canRotate = false;
     }
     private void CloseMap()
     {
+        playerUi.localScale = new Vector3(1.5f, 1.5f, 1.5f);
         isMapOpen = false;
         mapCanvas.gameObject.SetActive(false);
         FindObjectOfType<InventoryMouseUi>().isMapOpen=false;

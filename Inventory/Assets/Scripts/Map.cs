@@ -6,20 +6,14 @@ using UnityEngine;
 
 public class Map : MonoBehaviour
 {
-    [SerializeField] float minXZoomOutBorder;
-    [SerializeField] float maxXZoomOutBorder;
-    [SerializeField] float minZZoomOutBorder;
-    [SerializeField] float maxZZoomOutBorder;
-
-    [SerializeField] float minXZoomInBorder;
-    [SerializeField] float maxXZoomInBorder;
-    [SerializeField] float minZZoomInBorder;
-    [SerializeField] float maxZZoomInBorder;
-
-    [SerializeField] private Transform player;
     [Header("Map Attributes")]
 
     [SerializeField] private Camera cam;
+
+    [SerializeField] float minXZoom;
+    [SerializeField] float maxXZoom;
+    [SerializeField] float minZZoom;
+    [SerializeField] float maxZZoom;
 
     [SerializeField] private float zoomMultiplier = 4f;
     [SerializeField] private float minZoom = 2f;
@@ -47,8 +41,8 @@ public class Map : MonoBehaviour
     private void ClampBorders()
     {
         Vector3 tmpPos = transform.position;
-        tmpPos.x = Math.Clamp(transform.position.x, minXZoomInBorder, maxXZoomInBorder);
-        tmpPos.z = Math.Clamp(transform.position.z, minZZoomInBorder, maxZZoomInBorder);
+        tmpPos.x = Math.Clamp(transform.position.x, minXZoom, maxXZoom);
+        tmpPos.z = Math.Clamp(transform.position.z, minZZoom, maxZZoom);
         transform.position = tmpPos;
     }
     private void ZoomInAndOutMap()
