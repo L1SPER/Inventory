@@ -52,29 +52,12 @@ public class ItemInfo : MonoBehaviour
         canvasGameObject.SetActive(false);
         this.name = GetComponent<GroundItem>().item.itemObject.Name;
     }
-    public void OpenCanvas()
+    public void OnInteract(bool _isInteracting)
     {
-        if (canvasGameObject != null && openCanvas)
-        {
-            canvasGameObject.SetActive(true);
+        if(canvasGameObject != null)
+            canvasGameObject.SetActive(_isInteracting);
+
+        if(_isInteracting==true) 
             canvasGameObject.transform.rotation = Quaternion.LookRotation(canvasGameObject.transform.position - Camera.main.transform.position);
-        }
-    }
-    public void CloseCanvas()
-    {
-        if (canvasGameObject != null && !openCanvas)
-        {
-            canvasGameObject.SetActive(false);
-        }
-    }
-    public IEnumerator OpenCanvasByTime()
-    {
-        if (openCanvas)
-            yield break;
-        openCanvas = true;
-        OpenCanvas();
-        yield return new WaitForSeconds(1f);
-        openCanvas = false;
-        CloseCanvas();
     }
 }

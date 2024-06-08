@@ -27,9 +27,11 @@ public class PlayerInteraction : MonoBehaviour
     private bool canHit;
 
     [SerializeField] private Transform playerUi;
+    private IInteractable lastInteractableObj;
 
     private void Start()
     {
+        lastInteractableObj = null;
         isInventoryOpen = false;
         isMapOpen= false;
         canHit = true;
@@ -115,13 +117,31 @@ public class PlayerInteraction : MonoBehaviour
             IInteractable InteractableObj = hit.transform.GetComponent<IInteractable>();
             if (InteractableObj != null&&canHit)
             {
-                InteractableObj.InteractWithoutPressingButton();
+                //en baþta last null
+                if (InteractableObj != lastInteractableObj)
+                {
+                    if (lastInteractableObj != null)
+                    {
+                        lastInteractableObj.InteractWithoutPressingButton(false);
+                    }
+                }
+                lastInteractableObj = InteractableObj;
+                InteractableObj.InteractWithoutPressingButton(true);
                 if (Input.GetButtonDown("Fire1"))
                 {
                     InteractableObj.InteractWithPressingButton();
+                    lastInteractableObj = null;
                 }
             }
-        } 
+        }
+        else
+        {
+            if (lastInteractableObj != null)
+            {
+                lastInteractableObj.InteractWithoutPressingButton(false);
+                lastInteractableObj = null;
+            }
+        }
     }
     private void OnApplicationQuit()
     {
@@ -130,6 +150,5 @@ public class PlayerInteraction : MonoBehaviour
         {
             equipment.GetSlots[i].UpdateSlot(null,-1,0, equipment.GetSlots[i].parentId, equipment.GetSlots[i].slotId, equipment.GetSlots[i].allowedItems);
         }
-        //equipment.Container.Slots = new InventorySlot[7];
     }
 }

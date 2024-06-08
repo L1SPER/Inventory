@@ -16,7 +16,10 @@ public class GroundItem : MonoBehaviour, IInteractable
     }
     public void InteractWithoutPressingButton()
     {
-        GetComponent<ItemInfo>().StartCoroutine("OpenCanvasByTime");
+    }
+    public void InteractWithoutPressingButton(bool _isInteracting)
+    {
+        GetComponent<ItemInfo>().OnInteract(_isInteracting);
     }
     public void InteractWithPressingButton()
     {

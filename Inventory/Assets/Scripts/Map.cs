@@ -58,25 +58,28 @@ public class Map : MonoBehaviour
     }
     private void MouseDrag()
     {
-        if (Input.GetMouseButton(0))
+        if(FindObjectOfType<InventoryMouseUi>().isMapOpen)
         {
-            difference = new Vector3(cam.ScreenToWorldPoint(Input.mousePosition).x - cam.transform.position.x, 0f,cam.ScreenToWorldPoint(Input.mousePosition).z - cam.transform.position.z);
-            if (!drag)
+            if (Input.GetMouseButton(0))
             {
-                drag = true;
-                origin = new Vector3(cam.ScreenToWorldPoint(Input.mousePosition).x,0f, cam.ScreenToWorldPoint(Input.mousePosition).z);
+                difference = new Vector3(cam.ScreenToWorldPoint(Input.mousePosition).x - cam.transform.position.x, 0f, cam.ScreenToWorldPoint(Input.mousePosition).z - cam.transform.position.z);
+                if (!drag)
+                {
+                    drag = true;
+                    origin = new Vector3(cam.ScreenToWorldPoint(Input.mousePosition).x, 0f, cam.ScreenToWorldPoint(Input.mousePosition).z);
+                }
             }
+            else
+            {
+                drag = false;
+            }
+            if (drag)
+            {
+                Vector3 diff = origin - difference;
+                cam.transform.position = new Vector3(diff.x, 180f, diff.z);
+            }
+            if (Input.GetMouseButton(1))
+                cam.transform.position = camStartPos;
         }
-        else
-        {
-            drag = false;
-        }
-        if (drag)
-        {
-            Vector3 diff = origin - difference;
-            cam.transform.position =new Vector3(diff.x,180f,diff.z) ;
-        }
-        if (Input.GetMouseButton(1))
-            cam.transform.position = camStartPos;
     }
 }
