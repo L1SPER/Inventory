@@ -35,6 +35,10 @@ public class InventoryManager : MonoBehaviour,ISerializationCallbackReceiver
             GetInventoryObject[_slot1.parentId].Container.FindInventorySlot(_slot1.slotId).UpdateSlot(tempSlot.item, tempSlot.id, tempSlot.amount, _slot1.parentId, _slot1.slotId);
         }
     }
+    public void SortInventory(int id)
+    {
+        GetInventoryObject[id].Sort();
+    }
     public bool CanPlaceInSlot(InventorySlot _slot1, InventorySlot _slot2)
     {
         //inventory to inventory 0->0

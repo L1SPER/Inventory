@@ -21,6 +21,7 @@ public class InventoryObject : ScriptableObject
     public ItemDatabaseObject database;
     public UserInterface type;
     public InventorySlot[] GetSlots => Container.Slots;
+
     public void AddItem(Item item)
     {
         if(!IsInventoryFull())
@@ -103,6 +104,32 @@ public class InventoryObject : ScriptableObject
     public void Clear()
     {
         Container.Clear();
+    }
+    public void Sort()
+    {
+        int left = 0;
+        int right=Container.Slots.Length-1;
+        
+        while(left<right)
+        {
+            //En soldaki dolu slotu bul
+            while (left < right && GetSlots[left].id>=0)
+            {
+                left++;
+            }
+            //En saðdaki boþ slotu bul
+            while (left < right && GetSlots[right].id==-1)
+            {
+                right--;
+            }
+            //Bu slotu swapla
+            if(left<right)
+            {
+                InventoryManager.Instance.SwapSlots(GetSlots[left], GetSlots[right]);
+                left++;
+                right--;
+            }
+        }
     }
     public InventorySlot FindItemOnInventory(Item _item)
     {
