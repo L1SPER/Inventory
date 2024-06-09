@@ -8,7 +8,6 @@ using UnityEngine.UI;
 public class ItemInfo : MonoBehaviour
 {
     private GameObject canvasGameObject;
-    public bool openCanvas;
 
     private void Start()
     {

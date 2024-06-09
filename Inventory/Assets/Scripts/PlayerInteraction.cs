@@ -15,9 +15,6 @@ public class PlayerInteraction : MonoBehaviour
     public readonly KeyCode inventoryKey = KeyCode.I;
     public readonly KeyCode mapKey = KeyCode.M;
 
-    [SerializeField] private GameObject inventoryCanvas;
-    [SerializeField] private GameObject mapCanvas;
-
     [Header("Cams")]
     [SerializeField] private Camera fpsCam;
     [SerializeField] private Camera mapCam;
@@ -26,7 +23,6 @@ public class PlayerInteraction : MonoBehaviour
     private bool isMapOpen;
     private bool canHit;
 
-    [SerializeField] private Transform playerUi;
     private IInteractable lastInteractableObj;
 
     private void Start()
@@ -80,34 +76,34 @@ public class PlayerInteraction : MonoBehaviour
     {
         canHit = false;
         isInventoryOpen = true;
-        inventoryCanvas.gameObject.SetActive(true);
         FindObjectOfType<InventoryMouseUi>().isInventoryOpen = true;
         GetComponentInChildren<FPSCameraController>().canRotate = false;
+        FindObjectOfType<InventoryCanvas>().OpenInventory();
     }
     private void CloseInventory()
     {
         canHit = true;
         isInventoryOpen = false;
-        inventoryCanvas.gameObject.SetActive(false);
         FindObjectOfType<InventoryMouseUi>().isInventoryOpen = false;
         GetComponentInChildren<FPSCameraController>().canRotate = true;
+        FindObjectOfType<InventoryCanvas>().CloseInventory();
     }
-    private void OpenMap()
+    public void OpenMap()
     {
-        isMapOpen= true;
-        mapCanvas.gameObject.SetActive(true);
-        playerUi.localScale = new Vector3(15f, 15f, 15f);
+        canHit = false;
+        isMapOpen = true;
         FindObjectOfType<InventoryMouseUi>().isMapOpen = true;
-        FindObjectOfType<Map>().camStartPos = mapCam.transform.position;
+        FindObjectOfType<MapCanvas>().camStartPos = transform.position;
         GetComponentInChildren<FPSCameraController>().canRotate = false;
+        FindObjectOfType<MapCanvas>().OpenMap();
     }
     private void CloseMap()
     {
-        playerUi.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+        canHit = true;
         isMapOpen = false;
-        mapCanvas.gameObject.SetActive(false);
         FindObjectOfType<InventoryMouseUi>().isMapOpen=false;
         GetComponentInChildren<FPSCameraController>().canRotate = true;
+        FindObjectOfType<MapCanvas>().CloseMap();
     }
     private void Shoot()
     {
