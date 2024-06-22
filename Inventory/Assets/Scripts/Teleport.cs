@@ -5,11 +5,13 @@ using UnityEngine;
 public class Teleport : MonoBehaviour,IInteractable
 {
     private bool isActive;
-    private int id;
-    public string Name;
+    public int id;
+    private Vector3 destination;
+    [SerializeField] string Name;
     
     void Start()
     {
+        destination= transform.position;
         isActive = false;
         Name = "Teleport";
     }

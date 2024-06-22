@@ -8,7 +8,8 @@ using UnityEngine;
 public class PlayerInteraction : MonoBehaviour
 {
     [SerializeField]
-    private float range;
+    private float fpsCamRange;
+    private float mapCamRange;
     public InventoryObject inventory;
     public InventoryObject equipment;
     
@@ -108,12 +109,23 @@ public class PlayerInteraction : MonoBehaviour
     private void Shoot()
     {
         RaycastHit hit;
-        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
+        Transform transform;
+        float _range;
+        if(FindObjectOfType<InventoryMouseUi>().isMapOpen)
+        {
+            _range = mapCamRange;
+            transform = mapCam.transform;
+        }
+        else
+        {
+            _range = fpsCamRange;
+            transform = fpsCam.transform; 
+        }
+        if (Physics.Raycast(transform.position, transform.forward, out hit, _range))
         {
             IInteractable InteractableObj = hit.transform.GetComponent<IInteractable>();
-            if (InteractableObj != null&&canHit)
+            if (InteractableObj != null && canHit)
             {
-                //en baþta last null
                 if (InteractableObj != lastInteractableObj)
                 {
                     if (lastInteractableObj != null)

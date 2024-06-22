@@ -3,12 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MapCanvas : MonoBehaviour
 {
     [Header("Map Attributes")]
 
     [SerializeField] private Camera cam;
+    [SerializeField] private Camera fpsCam;
+
 
     [SerializeField] float minXZoom;
     [SerializeField] float maxXZoom;
@@ -32,6 +35,8 @@ public class MapCanvas : MonoBehaviour
     [SerializeField] private GameObject mapCanvas;
     [SerializeField] private Transform playerUi;
 
+    public Button[] tpButtons;
+
     private void Start()
     {
         zoom = cam.orthographicSize;
@@ -42,7 +47,14 @@ public class MapCanvas : MonoBehaviour
         ZoomInAndOutMap();
         MouseDrag();
         ClampBorders();
+        //UpdateUi();
     }
+
+    //private void UpdateUi()
+    //{
+    //    Debug.Log(cam.ScreenToViewportPoint(Input.mousePosition));
+    //}
+
     private void ClampBorders()
     {
         Vector3 tmpPos = transform.position;
@@ -54,10 +66,13 @@ public class MapCanvas : MonoBehaviour
     {
         if (FindObjectOfType<InventoryMouseUi>().isMapOpen)
         {
-            Debug.Log("1234");
             float scroll = Input.GetAxis("Mouse ScrollWheel");
             zoom -= scroll * zoomMultiplier;
             zoom = Math.Clamp(zoom, minZoom, maxZoom);
+            if (zoom < 400)
+                zoom = 300f;
+            else if (zoom < 500)
+                zoom = 400f;
             cam.orthographicSize = Mathf.SmoothDamp(cam.orthographicSize, zoom, ref velocity, smoothTime);
         }
     }
@@ -87,6 +102,17 @@ public class MapCanvas : MonoBehaviour
             //    cam.transform.position = camStartPos;
         }
     }
+    //private void MouseHover()
+    //{
+    //    if (FindObjectOfType<InventoryMouseUi>().isMapOpen)
+    //    {
+    //        Debug.Log(cam.ScreenToWorldPoint(Input.mousePosition));
+    //    }
+    //    else
+    //    {
+    //        Debug.Log(fpsCam.ScreenToWorldPoint(Input.mousePosition));
+    //    }
+    //}
     public void OpenMap()
     {
         isMapOpen = true;
